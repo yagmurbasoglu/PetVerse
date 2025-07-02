@@ -6,5 +6,5 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/sedayhan/petverse-config-repo.git
+          uri: https://github.com/sedayhan934/petverse-config-repo.git
 
