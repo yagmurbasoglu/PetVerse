@@ -1,4 +1,4 @@
-package com.PetVerse.configserver;
+package com.petverse.configserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
