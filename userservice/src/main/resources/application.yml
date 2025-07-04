@@ -5,7 +5,7 @@ spring:
   application:
     name: userservice
   datasource:
-    url: jdbc:postgresql://localhost:5432/petcaredb
+    url: jdbc:postgresql://postgres:5432/petcaredb
     username: admin
     password: admin123
   jpa:
@@ -17,6 +17,4 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    prefer-ip-address: true
+      defaultZone: http://eurekaserver:8761/eureka

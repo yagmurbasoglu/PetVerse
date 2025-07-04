@@ -1,4 +1,4 @@
-package com.petverse.userservice;
+package com.PetVerse.userservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

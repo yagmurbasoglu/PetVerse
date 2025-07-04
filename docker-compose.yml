@@ -1,27 +1,67 @@
-version: '3.8'
-
 services:
+
+  eurekaserver:
+    build:
+      context: ./eurekaserver
+    ports:
+      - "8761:8761"
+    networks:
+      - petverse-net
+
+  configserver:
+    build:
+      context: ./configserver
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eurekaserver
+    networks:
+      - petverse-net
+
+  apigateway:
+    build:
+      context: ./apigateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      - configserver
+      - eurekaserver
+    networks:
+      - petverse-net
+
+  userservice:
+    build:
+      context: ./userservice
+    ports:
+      - "8082:8082"
+    depends_on:
+      - configserver
+      - postgres
+    networks:
+      - petverse-net
+
+  petservice:
+    build:
+      context: ./petservice
+    ports:
+      - "8083:8083"
+    depends_on:
+      - configserver
+      - postgres
+    networks:
+      - petverse-net
+
   postgres:
     image: postgres:15
-    container_name: postgres_container
+    container_name: postgres
     environment:
+      POSTGRES_DB: petcaredb
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin123
-      POSTGRES_DB: petcaredb
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - petverse-net
 
-  rabbitmq:
-    image: rabbitmq:3-management
-    container_name: rabbitmq_container
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    environment:
-      RABBITMQ_DEFAULT_USER: guest
-      RABBITMQ_DEFAULT_PASS: guest
-
-volumes:
-  postgres_data:
+networks:
+  petverse-net:
