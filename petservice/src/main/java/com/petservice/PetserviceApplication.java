@@ -1,4 +1,4 @@
-package com.petservice.petservice;
+package com.petservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,3 +11,4 @@ public class PetserviceApplication {
         SpringApplication.run(PetserviceApplication.class, args);
     }
 }
+
