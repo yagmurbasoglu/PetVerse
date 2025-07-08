@@ -1,9 +1,10 @@
-package com.PetVerse.userservice.service;
+package com.petverse.userservice.service;
 
-import com.PetVerse.userservice.dto.UserDto;
-import com.PetVerse.userservice.model.User;
-import com.PetVerse.userservice.repository.UserRepository;
+import com.petverse.userservice.dto.UserDto;
+import com.petverse.userservice.model.User;
+import com.petverse.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,14 +12,17 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User registerUser(UserDto userDto) {
-        User user = User.builder()
-                .username(userDto.getUsername())
-                .email(userDto.getEmail())
-                .password(userDto.getPassword()) // TODO: Add hashing later
-                .build();
+        User user = new User();
+        user.setEmail(userDto.getEmail());
+        user.setUsername(userDto.getUsername());
+
+        
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
         return userRepository.save(user);
     }
 }

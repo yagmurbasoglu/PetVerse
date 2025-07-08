@@ -1,14 +1,29 @@
-package com.PetVerse.userservice.dto;
+package com.petverse.userservice.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.petverse.userservice.model.User;
+import lombok.*;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
-    private String username;
+
     private String email;
     private String password;
+    private String fullName;
+    private String username;
+
+    public String getUsername() {
+    return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public UserDto(User user) {
+        this.email = user.getEmail();
+        this.fullName = user.getFullName();
+        this.password = ""; // Şifre DTO'da tutulmaz, güvenlik için boş bırakılır
+    }
 }

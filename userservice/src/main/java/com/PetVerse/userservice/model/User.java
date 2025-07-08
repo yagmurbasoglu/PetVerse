@@ -1,4 +1,4 @@
-package com.PetVerse.userservice.model;
+package com.petverse.userservice.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,4 +17,6 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private String fullName;
 }
+

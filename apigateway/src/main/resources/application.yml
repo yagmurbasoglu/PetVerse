@@ -14,8 +14,15 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+      routes:
+        - id: petservice
+          uri: lb://petservice
+          predicates:
+            - Path=/petservice/**
+          filters:
+            - StripPrefix=1
 
 eureka:
   client:
     service-url:
-      defaultZone: http://eurekaserver:8761/eureka  
+      defaultZone: http://eurekaserver:8761/eureka

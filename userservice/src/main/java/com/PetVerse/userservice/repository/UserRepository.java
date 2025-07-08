@@ -1,7 +1,8 @@
-package com.PetVerse.userservice.repository;
+package com.petverse.userservice.repository;
 
-import com.PetVerse.userservice.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.petverse.userservice.model.User;
 
 import java.util.Optional;
 
