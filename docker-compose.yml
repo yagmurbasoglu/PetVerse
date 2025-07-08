@@ -1,3 +1,5 @@
+version: '3.8'
+
 services:
 
   eurekaserver:
@@ -62,6 +64,12 @@ services:
       - "5432:5432"
     networks:
       - petverse-net
+    volumes:
+      - pgdata:/var/lib/postgresql/data  # ✅ Kalıcı veri için net volume adı
 
 networks:
   petverse-net:
+    driver: bridge
+
+volumes:
+  pgdata:  # ✅ Volume adı temiz ve sabit
