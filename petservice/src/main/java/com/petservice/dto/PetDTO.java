@@ -5,18 +5,17 @@ public class PetDTO {
     private Long id; 
     private String name;
     private String species;
-    private Integer age;
-    private Long userId;   
+    private Integer age;  
+
 
     public PetDTO() {
     }
 
-    public PetDTO(Long id, String name, String species, Integer age, Long userId) {
+    public PetDTO(Long id, String name, String species, Integer age) {
         this.id = id;
         this.name = name;
         this.species = species;
         this.age = age;
-        this.userId = userId;
     }
 
 
@@ -50,13 +49,5 @@ public class PetDTO {
 
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 }

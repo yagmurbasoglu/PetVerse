@@ -13,7 +13,6 @@ public class Pet {
     private String name;
     private String species;
     private Integer age;
-    private Long userId;
 
     public Pet() {}
 

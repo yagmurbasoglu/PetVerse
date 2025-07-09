@@ -1,4 +1,4 @@
-package com.PetVerse.apigateway;
+package com.petverse.apigateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
