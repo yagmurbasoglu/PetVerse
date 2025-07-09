@@ -65,11 +65,11 @@ services:
     networks:
       - petverse-net
     volumes:
-      - pgdata:/var/lib/postgresql/data  # ✅ Kalıcı veri için net volume adı
+      - pgdata:/var/lib/postgresql/data 
 
 networks:
   petverse-net:
     driver: bridge
 
 volumes:
-  pgdata:  # ✅ Volume adı temiz ve sabit
+  pgdata:

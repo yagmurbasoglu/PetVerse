@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Debug UserService",
+      "request": "launch",
+      "mainClass": "com.petverse.userservice.UserServiceApplication",
+      "projectName": "userservice",
+      "args": [
+        "--spring.datasource.url=jdbc:postgresql://localhost:5432/petverse",
+        "--spring.datasource.username=postgres",
+        "--spring.datasource.password=postgres",
+        "--spring.rabbitmq.host=localhost",
+        "--eureka.client.enabled=false",
+        "--spring.config.import=optional:classpath:/application.yml"
+      ]
+    }
+  ]
+}

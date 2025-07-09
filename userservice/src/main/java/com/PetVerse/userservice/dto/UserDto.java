@@ -1,29 +1,25 @@
 package com.petverse.userservice.dto;
 
 import com.petverse.userservice.model.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class UserDto {
 
     private String email;
-    private String password;
-    private String fullName;
+    private String password; // sadece girişte kullanılır
     private String username;
 
-    public String getUsername() {
-    return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
+    // Kullanıcıdan DTO üretmek için constructor
     public UserDto(User user) {
         this.email = user.getEmail();
-        this.fullName = user.getFullName();
-        this.password = ""; // Şifre DTO'da tutulmaz, güvenlik için boş bırakılır
+        this.username = user.getUsername();
+        this.password = ""; // Güvenlik gereği şifre asla dışarı verilmez
     }
 }
