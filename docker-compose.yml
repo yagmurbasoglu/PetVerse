@@ -20,6 +20,17 @@ services:
     networks:
       - petverse-net
 
+  activityservice:
+    build:
+      context: ./activityservice
+    ports:
+      - "8084:8084"
+    depends_on:
+      - postgres
+      - rabbitmq
+    networks:
+      - petverse-net
+
   apigateway:
     build:
       context: ./apigateway
@@ -39,6 +50,7 @@ services:
     depends_on:
       - configserver
       - postgres
+      - rabbitmq
     networks:
       - petverse-net
 
@@ -53,6 +65,18 @@ services:
     networks:
       - petverse-net
 
+  notificationservice:
+    build:
+      context: ./notificationservice
+    ports:
+      - "8085:8085"
+    depends_on:
+      - rabbitmq
+      - postgres
+    networks:
+      - petverse-net
+
+
   postgres:
     image: postgres:15
     container_name: postgres
@@ -65,11 +89,20 @@ services:
     networks:
       - petverse-net
     volumes:
-      - pgdata:/var/lib/postgresql/data  # ✅ Kalıcı veri için net volume adı
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - petverse-net
 
 networks:
   petverse-net:
     driver: bridge
 
 volumes:
-  pgdata:  # ✅ Volume adı temiz ve sabit
+  pgdata:
