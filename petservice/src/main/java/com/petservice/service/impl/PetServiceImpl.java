@@ -31,15 +31,7 @@ public class PetServiceImpl implements PetService {
 
         Pet saved = petRepository.save(pet);
         return convertToDTO(saved);
-        Pet pet = new Pet();
-
-        pet.setName(petDTO.getName());
-        pet.setAge(petDTO.getAge());
-        pet.setSpecies(petDTO.getSpecies());
-
-
-        Pet saved = petRepository.save(pet);
-        return convertToDTO(saved);
+       
     }
 
     @Override
@@ -47,14 +39,12 @@ public class PetServiceImpl implements PetService {
         Pet pet = petRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pet not found with ID: " + id));
         return convertToDTO(pet);
-        return convertToDTO(pet);
     }
 
     @Override
     public List<PetDTO> getAllPets() {
         return petRepository.findAll()
                 .stream()
-                .map(this::convertToDTO)
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
@@ -69,7 +59,6 @@ public class PetServiceImpl implements PetService {
         existingPet.setAge(dto.getAge());
 
         Pet updated = petRepository.save(existingPet);
-        return convertToDTO(updated);
         return convertToDTO(updated);
     }
 

@@ -7,13 +7,10 @@ public class PetDTO {
     private String species;
     private Integer age;  
 
-    private Integer age;  
-
 
     public PetDTO() {
     }
-
-    public PetDTO(Long id, String name, String species, Integer age) {
+    
     public PetDTO(Long id, String name, String species, Integer age) {
         this.id = id;
         this.name = name;
