@@ -1,4 +1,4 @@
-package com.PetVerse.configserver;
+package com.petverse.configserver;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

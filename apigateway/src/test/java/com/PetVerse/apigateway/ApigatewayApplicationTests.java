@@ -1,4 +1,4 @@
-package com.PetVerse.apigateway;
+package com.petverse.apigateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

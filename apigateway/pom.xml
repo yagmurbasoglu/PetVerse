@@ -10,12 +10,14 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.5.3</version>
         <relativePath/>
+        <relativePath/>
     </parent>
 
     <groupId>com.PetVerse</groupId>
     <artifactId>apigateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>apigateway</name>
+    <description>API Gateway for PetVerse</description>
     <description>API Gateway for PetVerse</description>
 
     <properties>
@@ -101,6 +103,11 @@
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
             <plugin>
