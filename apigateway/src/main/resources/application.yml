@@ -4,10 +4,10 @@ server:
 spring:
   application:
     name: apigateway
-
+  main:
+    web-application-type: reactive
   config:
     import: optional:configserver:http://configserver:8888
-
   cloud:
     gateway:
       discovery:
@@ -18,16 +18,16 @@ spring:
         - id: petservice
           uri: lb://petservice
           predicates:
-            - Path=/petservice/**
+            - Path=/api/pets/**
           filters:
             - StripPrefix=1
 
         - id: userservice
           uri: lb://userservice
           predicates:
-            - Path=/auth/**
+            - Path=/api/auth/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=0
 
 eureka:
   client:

@@ -26,7 +26,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll() // login, register
+                        .requestMatchers("/api/auth/**").permitAll() // login, register
                         .anyRequest().authenticated()            // diğer her şey JWT ister
                 )
                 .sessionManagement(session -> session
