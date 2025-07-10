@@ -3,8 +3,9 @@ package com.petservice.service.impl;
 import com.petservice.dto.PetDTO;
 import com.petservice.model.Pet;
 import com.petservice.repository.PetRepository;
-import com.petservice.mapper.PetMapper;
 import com.petservice.service.PetService;
+
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,32 +15,38 @@ import java.util.stream.Collectors;
 public class PetServiceImpl implements PetService {
 
     private final PetRepository petRepository;
-    private final PetMapper petMapper;
 
-    public PetServiceImpl(PetRepository petRepository, PetMapper petMapper) {
-        this.petRepository = petRepository;
-        this.petMapper = petMapper;
-    }
+    public PetServiceImpl(PetRepository petRepository) {
+    this.petRepository = petRepository;
+
+}
+
 
     @Override
     public PetDTO createPet(PetDTO petDTO) {
-        Pet entity = petMapper.toEntity(petDTO);
-        Pet saved = petRepository.save(entity);
-        return petMapper.toDto(saved);
+        Pet pet = new Pet();
+
+        pet.setName(petDTO.getName());
+        pet.setAge(petDTO.getAge());
+        pet.setSpecies(petDTO.getSpecies());
+
+
+        Pet saved = petRepository.save(pet);
+        return convertToDTO(saved);
     }
 
     @Override
     public PetDTO getPetById(Long id) {
         Pet pet = petRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Pet not found with ID: " + id));
-        return petMapper.toDto(pet);
+        return convertToDTO(pet);
     }
 
     @Override
     public List<PetDTO> getAllPets() {
         return petRepository.findAll()
                 .stream()
-                .map(petMapper::toDto)
+                .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
 
@@ -53,7 +60,7 @@ public class PetServiceImpl implements PetService {
         existingPet.setAge(dto.getAge());
 
         Pet updated = petRepository.save(existingPet);
-        return petMapper.toDto(updated);
+        return convertToDTO(updated);
     }
 
     @Override
@@ -62,5 +69,14 @@ public class PetServiceImpl implements PetService {
             throw new RuntimeException("Pet not found with ID: " + id);
         }
         petRepository.deleteById(id);
+    }
+
+    private PetDTO convertToDTO(Pet pet) {
+        PetDTO dto = new PetDTO();
+        dto.setId(pet.getId());
+        dto.setName(pet.getName());
+        dto.setSpecies(pet.getSpecies());
+        dto.setAge(pet.getAge());
+        return dto;
     }
 }

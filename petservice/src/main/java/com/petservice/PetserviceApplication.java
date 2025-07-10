@@ -2,12 +2,11 @@ package com.petservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
-@SpringBootApplication(scanBasePackages = "com.petservice")
-@EnableJpaRepositories(basePackages = "com.petservice.repository")
+@SpringBootApplication
+@EnableDiscoveryClient
 public class PetserviceApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(PetserviceApplication.class, args);
     }

@@ -2,45 +2,46 @@ package com.petverse.userservice.controller;
 
 import com.petverse.userservice.dto.UserDto;
 import com.petverse.userservice.model.User;
-import com.petverse.userservice.repository.UserRepository;
+import com.petverse.userservice.service.AuthenticationService;
+import com.petverse.userservice.service.UserService;
 import com.petverse.userservice.security.JwtService;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
+    private final AuthenticationService authenticationService;
+    private final UserService userService;
     private final JwtService jwtService;
-    private final UserRepository userRepository;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDto userDto) {
-        try {
-            authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            userDto.getEmail(),
-                            userDto.getPassword()
-                    )
-            );
-
-            User user = userRepository.findByEmail(userDto.getEmail())
-                    .orElseThrow(() -> new RuntimeException("User not found"));
-
-            String token = jwtService.generateToken(user); 
-
-            return ResponseEntity.ok(Map.of("token", token));
-
-        } catch (AuthenticationException e) {
-            return ResponseEntity.status(401).body(Map.of("error", "Login failed"));
-        }
+    public ResponseEntity<String> login(@RequestBody UserDto userDto) {
+        String token = authenticationService.login(userDto);
+        return ResponseEntity.ok(token);
     }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody UserDto userDto) {
+        // Kullanıcıyı veritabanına kaydet
+        User savedUser = userService.registerUser(userDto);
+
+        // Token üret
+        String jwtToken = jwtService.generateToken(savedUser.getUsername());
+
+        return ResponseEntity.ok(jwtToken);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<Long> getUserIdByEmail(@PathVariable String email) {
+        User user = userService.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return ResponseEntity.ok(user.getId());
+    }
+
 }

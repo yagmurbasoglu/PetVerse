@@ -6,6 +6,7 @@ import com.petverse.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,13 +17,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(UserDto userDto) {
-        User user = new User();
-        user.setEmail(userDto.getEmail());
-        user.setUsername(userDto.getUsername());
+        System.out.println(">>> registerUser metodu çağrıldı: " + userDto.getEmail());
 
-        
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        User user = User.builder()
+                .email(userDto.getEmail())
+                .username(userDto.getUsername())
+                .password(passwordEncoder.encode(userDto.getPassword()))
+                .build();
 
-        return userRepository.save(user);
+        User savedUser = userRepository.save(user);
+        System.out.println(">>> Kullanıcı başarıyla kaydedildi: ID = " + savedUser.getId());
+
+        return savedUser;
     }
+    @Override
+    public Optional<User> findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 }

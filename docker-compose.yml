@@ -50,7 +50,6 @@ services:
     depends_on:
       - configserver
       - postgres
-      - rabbitmq
     networks:
       - petverse-net
 

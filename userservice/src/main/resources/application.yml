@@ -18,3 +18,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://eurekaserver:8761/eureka
+
+jwt:
+  issuer: userservice
+  ttl: 15m
+  public-key: classpath:jwt/app.pub
+  private-key: classpath:jwt/app.key
