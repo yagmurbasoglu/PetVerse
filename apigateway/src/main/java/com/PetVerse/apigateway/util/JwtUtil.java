@@ -1,7 +1,6 @@
 package com.petverse.apigateway.util;
 
 import io.jsonwebtoken.*;
-import io.jsonwebtoken.security.SecurityException;
 import org.springframework.stereotype.Component;
 
 import java.security.PublicKey;

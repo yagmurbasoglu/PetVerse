@@ -5,7 +5,6 @@ import com.petservice.model.Pet;
 import com.petservice.repository.PetRepository;
 import com.petservice.service.PetService;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +19,6 @@ public class PetServiceImpl implements PetService {
     this.petRepository = petRepository;
 
 }
-
 
     @Override
     public PetDTO createPet(PetDTO petDTO) {
