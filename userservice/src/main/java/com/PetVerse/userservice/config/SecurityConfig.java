@@ -28,6 +28,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/register", 
                         "/api/auth/login",
+                        "/swagger-ui.html",
                         "/swagger-ui/**",
     "/v3/api-docs/**").permitAll() // login, register
                         .anyRequest().authenticated()            // diğer her şey JWT ister
