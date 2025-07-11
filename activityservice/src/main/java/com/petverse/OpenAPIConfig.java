@@ -1,4 +1,4 @@
-package com.activityservice.config;
+package com.petverse;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class OpenAPIConfig {
+
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
