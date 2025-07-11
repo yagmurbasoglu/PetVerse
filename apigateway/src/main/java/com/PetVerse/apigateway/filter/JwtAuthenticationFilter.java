@@ -37,21 +37,25 @@ public class JwtAuthenticationFilter implements GlobalFilter {
             return exchange.getResponse().setComplete();
         }
 
-        // Token alınıyor
         String token = authHeader.substring(7);
 
         try {
             Claims claims = jwtUtil.validateToken(token);
-            // X-User-Email header eklemesi (downstream servislerde kullanılabilir)
+
+            // 👇 Header'a user bilgileri ekle (id veya email)
+            String email = claims.getSubject();
+            String userId = claims.get("userId", String.class); // Eğer token içinde varsa
+
             exchange = exchange.mutate()
-                    .request(builder -> builder.header("X-User-Email", claims.getSubject()))
+                    .request(builder -> builder
+                        .header("X-User-Email", email)
+                        .header("X-User-Id", userId != null ? userId : ""))
                     .build();
+
         } catch (JwtException e) {
-            // JWT parsing veya doğrulama hatası
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();
         } catch (Exception e) {
-            // Her ihtimale karşı genel hata
             exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
             return exchange.getResponse().setComplete();
         }
@@ -59,3 +63,4 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         return chain.filter(exchange);
     }
 }
+

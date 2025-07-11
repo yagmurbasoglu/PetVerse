@@ -9,5 +9,8 @@ public interface PetService {
     PetDTO getPetById(Long id);        
     List<PetDTO> getAllPets();          
     PetDTO updatePet(Long id, PetDTO dto);  
-    void deletePet(Long id);                 
+    void deletePet(Long id);   
+
+    // 🔥 Yeni method:
+    List<PetDTO> getPetsByUserId(String userId);            
 }

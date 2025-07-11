@@ -26,16 +26,18 @@ public class AuthController {
         return ResponseEntity.ok(token);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody UserDto userDto) {
-        // Kullanıcıyı veritabanına kaydet
-        User savedUser = userService.registerUser(userDto);
+@PostMapping("/register")
+public ResponseEntity<String> register(@RequestBody UserDto userDto) {
+    User savedUser = userService.registerUser(userDto);
 
-        // Token üret
-        String jwtToken = jwtService.generateToken(savedUser.getUsername());
+    String jwtToken = jwtService.generateToken(
+        savedUser.getUsername(),
+        savedUser.getId().toString()
+    );
 
-        return ResponseEntity.ok(jwtToken);
-    }
+    return ResponseEntity.ok(jwtToken);
+}
+
 
     @GetMapping("/email/{email}")
     public ResponseEntity<Long> getUserIdByEmail(@PathVariable String email) {

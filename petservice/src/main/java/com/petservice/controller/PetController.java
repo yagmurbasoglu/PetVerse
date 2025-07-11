@@ -17,12 +17,16 @@ public class PetController {
         this.petService = petService;
     }
 
-    //Yeni pet oluştur
-    @PostMapping
-    public ResponseEntity<PetDTO> createPet(@RequestBody PetDTO petDTO) {
-        PetDTO created = petService.createPet(petDTO);
-        return ResponseEntity.ok(created);
-    }
+@PostMapping
+public ResponseEntity<PetDTO> createPet(
+        @RequestBody PetDTO petDTO,
+        @RequestHeader("X-User-Id") String userId
+) {
+    petDTO.setUserId(Long.parseLong(userId));
+    PetDTO created = petService.createPet(petDTO);
+    return ResponseEntity.ok(created);
+}
+
 
     //Belirli ID'ye sahip pet getir
     @GetMapping("/{id}")
@@ -31,12 +35,14 @@ public class PetController {
         return ResponseEntity.ok(pet);
     }
 
-    //Tüm petleri getir
-    @GetMapping
-    public ResponseEntity<List<PetDTO>> getAllPets() {
-        List<PetDTO> pets = petService.getAllPets();
-        return ResponseEntity.ok(pets);
-    }
+@GetMapping
+public ResponseEntity<List<PetDTO>> getUserPets(
+        @RequestHeader("X-User-Id") String userId) {
+
+    List<PetDTO> pets = petService.getPetsByUserId(userId);
+    return ResponseEntity.ok(pets);
+}
+
 
     // Pet güncelle
     @PutMapping("/{id}")
