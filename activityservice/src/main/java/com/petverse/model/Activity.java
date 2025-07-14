@@ -8,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "activity") // İsteğe bağlı
+@Table(name = "activity")
 public class Activity {
 
     @Id
@@ -17,4 +17,7 @@ public class Activity {
 
     private String type;
     private String description;
+    private Long userId;
+    private Long petId;
+
 }
