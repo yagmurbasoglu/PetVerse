@@ -26,7 +26,7 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         System.out.println("Request path: " + path);  // DEBUG log
 
         // /auth içeren endpoint'ler token istemesin
-        if (path.contains("/auth")) {
+        if (path.contains("/api/auth")) {
             return chain.filter(exchange);
         }
 

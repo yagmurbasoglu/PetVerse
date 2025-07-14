@@ -2,6 +2,8 @@ server:
   port: 8084
 
 spring:
+  application:
+    name: activityservice
   datasource:
     url: jdbc:postgresql://postgres:5432/petcaredb
     username: admin
@@ -10,9 +12,16 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
   rabbitmq:
     host: rabbitmq
     port: 5672
     username: guest
     password: guest
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eurekaserver:8761/eureka
+  instance:
+    prefer-ip-address: true
+    hostname: activityservice

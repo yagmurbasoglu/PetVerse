@@ -29,8 +29,14 @@ spring:
           filters:
             - StripPrefix=0
 
+        - id: activityservice
+          uri: lb://activityservice
+          predicates:
+            - Path=/api/activities/**
+          filters:
+            - StripPrefix=1
+
 eureka:
   client:
     service-url:
       defaultZone: http://eurekaserver:8761/eureka
-      
