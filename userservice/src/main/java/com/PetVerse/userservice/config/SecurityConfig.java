@@ -29,29 +29,18 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-<<<<<<< HEAD
-                        .requestMatchers("/api/auth/register", 
-                        "/api/auth/login",
-                        "/swagger-ui.html",
-                        "/swagger-ui/**",
-    "/v3/api-docs/**").permitAll() // login, register
-                        .anyRequest().authenticated()            // diğer her şey JWT ister
-                )
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-=======
-                        .requestMatchers(
-                                "/api/auth/register",
-                                "/api/auth/login",
-                                "/swagger-ui/**",
-                                "/v3/api-docs/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
->>>>>>> feature/activityservice-jwt-auth
+                    .requestMatchers(
+                            "/api/auth/register",
+                            "/api/auth/login",
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**"
+                    ).permitAll()
+                    .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager() {
