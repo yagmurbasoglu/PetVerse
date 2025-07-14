@@ -1,5 +1,7 @@
 package com.petverse.userservice.service;
 
+import com.petverse.userservice.model.User;
+
 import com.petverse.userservice.dto.UserDto;
 import com.petverse.userservice.security.JwtService;
 import lombok.RequiredArgsConstructor;
@@ -15,18 +17,21 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
+    private final UserService userService; // 🔥 bunu ekle
 
-    public String login(UserDto userDto) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword())
-        );
+public String login(UserDto userDto) {
+    Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword())
+    );
 
-        // Authentication nesnesinden UserDetails alınır
-        UserDetails user = (UserDetails) authentication.getPrincipal();
+    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        // Kullanıcının username'i ile token oluşturulur
-        var jwtToken = jwtService.generateToken(user.getUsername());
+    // Email'den kullanıcıyı çek
+    User user = userService.findByEmail(userDetails.getUsername())
+            .orElseThrow(() -> new RuntimeException("User not found"));
 
-        return jwtToken;
-    }
+    // Yeni token: username + userId
+    return jwtService.generateToken(user.getEmail(), user.getId().toString());
+}
+
 }

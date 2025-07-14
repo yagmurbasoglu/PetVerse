@@ -6,6 +6,10 @@ import com.petverse.userservice.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
+import org.springframework.http.HttpStatus;
+
+
 import java.util.Optional;
 
 @Service
@@ -17,19 +21,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User registerUser(UserDto userDto) {
-        System.out.println(">>> registerUser metodu çağrıldı: " + userDto.getEmail());
+        if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bu kullanıcı adı zaten kullanılıyor.");
+        }
 
-        User user = User.builder()
-                .email(userDto.getEmail())
-                .username(userDto.getUsername())
-                .password(passwordEncoder.encode(userDto.getPassword()))
-                .build();
+        if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Bu e-posta zaten kullanılıyor.");
+        }
 
-        User savedUser = userRepository.save(user);
-        System.out.println(">>> Kullanıcı başarıyla kaydedildi: ID = " + savedUser.getId());
-
-        return savedUser;
+        User user = new User();
+        user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        return userRepository.save(user);
     }
+
+
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);

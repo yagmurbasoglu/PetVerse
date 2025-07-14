@@ -5,7 +5,8 @@ public class PetDTO {
     private Long id; 
     private String name;
     private String species;
-    private Integer age;  
+    private Integer age;
+    private Long userId;  
 
 
     public PetDTO() {
@@ -18,6 +19,8 @@ public class PetDTO {
         this.age = age;
     }
 
+public Long getUserId() { return userId; }
+public void setUserId(Long userId) { this.userId = userId; }
 
     public Long getId() {
         return id;

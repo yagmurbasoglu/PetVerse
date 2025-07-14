@@ -7,14 +7,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/activities")
+@RequestMapping("/activities")
 @RequiredArgsConstructor
 public class ActivityController {
     private final ActivityService activityService;
 
     @PostMapping
-    public ResponseEntity<Activity> createActivity(@RequestBody Activity activity) {
-        Activity saved = activityService.createActivity(activity);
+    public ResponseEntity<Activity> createActivity(
+            @RequestBody Activity activity,
+            @RequestHeader("X-User-Id") String userId) {
+
+        Activity saved = activityService.createActivity(activity, userId);
         return ResponseEntity.ok(saved);
     }
+
+
 }
