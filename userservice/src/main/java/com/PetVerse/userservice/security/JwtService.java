@@ -30,8 +30,4 @@ public String generateToken(String username, String userId) {
     return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 }
 
-
-    return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-}
-
 }

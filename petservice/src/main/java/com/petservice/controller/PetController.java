@@ -27,16 +27,6 @@ public class PetController {
         PetDTO created = petService.createPet(petDTO);
         return ResponseEntity.ok(created);
     }
-@PostMapping
-public ResponseEntity<PetDTO> createPet(
-        @RequestBody PetDTO petDTO,
-        @RequestHeader("X-User-Id") String userId
-) {
-    petDTO.setUserId(Long.parseLong(userId));
-    PetDTO created = petService.createPet(petDTO);
-    return ResponseEntity.ok(created);
-}
-
 
     // ✅ Kullanıcı sadece kendi pet'ini görüntüleyebilir
     @GetMapping("/{id}")
@@ -55,14 +45,6 @@ public ResponseEntity<PetDTO> createPet(
         List<PetDTO> pets = petService.getPetsByUserId(userId);
         return ResponseEntity.ok(pets);
     }
-@GetMapping
-public ResponseEntity<List<PetDTO>> getUserPets(
-        @RequestHeader("X-User-Id") String userId) {
-
-    List<PetDTO> pets = petService.getPetsByUserId(userId);
-    return ResponseEntity.ok(pets);
-}
-
 
     // ✅ Pet güncelleme — sadece sahibi güncelleyebilir
     @PutMapping("/{id}")

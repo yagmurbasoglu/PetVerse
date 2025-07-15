@@ -8,4 +8,3 @@ public interface UserService {
     User registerUser(UserDto userDto);
     Optional<User> findByEmail(String email);
 }
-

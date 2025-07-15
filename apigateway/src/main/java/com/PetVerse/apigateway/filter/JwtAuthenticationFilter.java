@@ -25,11 +25,9 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         String path = exchange.getRequest().getURI().getPath();
         System.out.println("Request path: " + path);  // DEBUG log
 
-        // /auth içeren endpoint'ler token istemesin
-        if (path.contains("/api/auth")) {
-            return chain.filter(exchange);
-        }
-        if (path.contains("/auth") ||
+
+        if (path.contains("/api/auth") ||
+            path.contains("/auth") ||
     path.contains("/v3/api-docs") ||
     path.contains("/swagger-ui") ||
     path.contains("/swagger-resources") ||

@@ -22,12 +22,3 @@ public interface PetService {
     // Kullanıcının tüm pet'lerini getir
     List<PetDTO> getPetsByUserId(String userId);
 }
-    PetDTO createPet(PetDTO petDTO);     
-    PetDTO getPetById(Long id);        
-    List<PetDTO> getAllPets();          
-    PetDTO updatePet(Long id, PetDTO dto);  
-    void deletePet(Long id);   
-
-    // 🔥 Yeni method:
-    List<PetDTO> getPetsByUserId(String userId);            
-}

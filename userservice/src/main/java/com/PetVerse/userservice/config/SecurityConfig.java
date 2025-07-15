@@ -36,13 +36,6 @@ public class SecurityConfig {
                             "/v3/api-docs/**"
                     ).permitAll()
                     .anyRequest().authenticated()
-                        .requestMatchers(
-                                "/api/auth/register",
-                                "/api/auth/login",
-                                "/swagger-ui/**",
-                                "/v3/api-docs/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .build();

@@ -34,9 +34,4 @@ public String login(UserDto userDto) {
     return jwtService.generateToken(user.getEmail(), user.getId().toString());
 }
 
-
-    // Yeni token: username + userId
-    return jwtService.generateToken(user.getEmail(), user.getId().toString());
-}
-
 }
