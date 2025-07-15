@@ -31,6 +31,19 @@ public class PetServiceImpl implements PetService {
     }
 
     // ✅ Kullanıcı sadece kendi pet'ini getirebilir
+@Override
+public PetDTO createPet(PetDTO petDTO) {
+    Pet pet = new Pet();
+    pet.setName(petDTO.getName());
+    pet.setAge(petDTO.getAge());
+    pet.setSpecies(petDTO.getSpecies());
+    pet.setUserId(petDTO.getUserId()); // 🟢 bu olmalı!
+
+    Pet saved = petRepository.save(pet);
+    return convertToDTO(saved);
+}
+
+
     @Override
     public PetDTO getPetById(Long id, Long userId) {
         Pet pet = petRepository.findById(id)
@@ -96,6 +109,18 @@ public class PetServiceImpl implements PetService {
         dto.setSpecies(pet.getSpecies());
         dto.setAge(pet.getAge());
         dto.setUserId(pet.getUserId());
+        dto.setUserId(pet.getUserId()); // 🔥 Bunu ekle
         return dto;
     }
+
+@Override
+public List<PetDTO> getPetsByUserId(String userId) {
+    Long id = Long.parseLong(userId); // ✅ tip dönüşümü
+    return petRepository.findByUserId(id)
+            .stream()
+            .map(this::convertToDTO)
+            .collect(Collectors.toList());
+}
+
+
 }

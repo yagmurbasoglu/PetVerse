@@ -24,3 +24,9 @@ jwt:
   ttl: 15m
   public-key: classpath:jwt/app.pub
   private-key: classpath:jwt/app.key
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html  

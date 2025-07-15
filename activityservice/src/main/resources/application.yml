@@ -25,3 +25,9 @@ eureka:
   instance:
     prefer-ip-address: true
     hostname: activityservice
+    
+springdoc:
+  api-docs:
+    path: /activity/v3/api-docs
+  swagger-ui:
+    path: /activity/swagger-ui.html

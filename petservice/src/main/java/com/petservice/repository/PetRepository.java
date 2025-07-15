@@ -15,3 +15,5 @@ public interface PetRepository extends JpaRepository<Pet, Long> {
     // Belirli kullanıcıya ait belirli pet'i getir (isteğe bağlı, ekstra güvenlik için kullanılabilir)
     Pet findByIdAndUserId(Long id, Long userId);
 }
+    List<Pet> findByUserId(Long userId); // 🔥 bunu ekliyoruz
+}

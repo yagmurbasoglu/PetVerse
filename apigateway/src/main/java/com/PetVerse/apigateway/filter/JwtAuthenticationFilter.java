@@ -29,6 +29,14 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         if (path.contains("/api/auth")) {
             return chain.filter(exchange);
         }
+        if (path.contains("/auth") ||
+    path.contains("/v3/api-docs") ||
+    path.contains("/swagger-ui") ||
+    path.contains("/swagger-resources") ||
+    path.contains("/webjars") ||
+    path.contains("/api-docs")) {
+    return chain.filter(exchange);
+}
 
         // Authorization header kontrolü
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
@@ -52,6 +60,7 @@ public class JwtAuthenticationFilter implements GlobalFilter {
                         .header("X-User-Id", userId != null ? userId : ""))
                     .build();
 
+                           
         } catch (JwtException e) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
             return exchange.getResponse().setComplete();

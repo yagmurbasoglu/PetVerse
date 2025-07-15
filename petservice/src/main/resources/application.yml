@@ -28,3 +28,9 @@ feign:
     config:
       default:
         loggerLevel: full
+
+springdoc:
+  api-docs:
+    path: /pet/v3/api-docs
+  swagger-ui:
+    path: /pet/swagger-ui.html
