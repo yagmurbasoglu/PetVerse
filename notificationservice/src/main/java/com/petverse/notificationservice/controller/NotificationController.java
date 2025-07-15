@@ -17,7 +17,8 @@ public class NotificationController {
     }
 
     @GetMapping
-    public List<Notification> getAllNotifications() {
-        return notificationRepository.findAll();
-    }
+    public List<Notification> getUserNotifications(@RequestHeader("X-User-Id") String userId) {
+        return notificationRepository.findByUserIdOrderByTimestampDesc(userId);
+}
+
 }

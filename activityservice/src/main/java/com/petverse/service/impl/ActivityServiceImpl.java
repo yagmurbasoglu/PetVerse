@@ -3,6 +3,7 @@ package com.petverse.service.impl;
 import com.petverse.client.PetServiceClient;
 import com.petverse.dto.PetDTO;
 import com.petverse.model.Activity;
+import com.petverse.dto.NotificationEvent;
 import com.petverse.producer.ActivityEventPublisher;
 import com.petverse.repository.ActivityRepository;
 import com.petverse.service.ActivityService;
@@ -28,10 +29,18 @@ public class ActivityServiceImpl implements ActivityService {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Bu pet bu kullanıcıya ait değil.");
         }
 
-        activity.setUserId(Long.parseLong(userId)); // ✅ güvenlik için tekrar set
+        // Kullanıcı doğrulandı → aktiviteyi kaydet
+        activity.setUserId(Long.parseLong(userId));
         Activity saved = activityRepository.save(activity);
 
-        publisher.publish("{\"type\": \"" + saved.getType() + "\", \"description\": \"" + saved.getDescription() + "\"}");
+        // 📨 Bildirim event'ini oluştur ve gönder
+        NotificationEvent event = new NotificationEvent(
+            saved.getType(),         // Örn: "FEEDING", "WALK", "DRINK"
+            saved.getDescription(),  // Açıklama
+            userId                   // JWT'den gelen kullanıcı ID'si
+        );
+
+        publisher.publish(event);
 
         return saved;
     }
