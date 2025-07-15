@@ -34,3 +34,12 @@ springdoc:
     path: /pet/v3/api-docs
   swagger-ui:
     path: /pet/swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always    
