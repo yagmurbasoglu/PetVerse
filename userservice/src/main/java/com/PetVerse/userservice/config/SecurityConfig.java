@@ -29,7 +29,7 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                    .requestMatchers(
+                    .requestMatchers("/actuator/**",
                             "/api/auth/register",
                             "/api/auth/login",
                             "/swagger-ui/**",
