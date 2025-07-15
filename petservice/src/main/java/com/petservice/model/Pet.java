@@ -14,14 +14,16 @@ public class Pet {
     private String species;
     private Integer age;
 
+    private Long userId; // 🔥 Eklenen alan
+
     public Pet() {}
 
-    // Full constructor
-    public Pet(Long id, String name, String species, Integer age) {
+    public Pet(Long id, String name, String species, Integer age, Long userId) {
         this.id = id;
         this.name = name;
         this.species = species;
         this.age = age;
+        this.userId = userId;
     }
 
     // Getters & Setters
@@ -36,4 +38,7 @@ public class Pet {
 
     public Integer getAge() { return age; }
     public void setAge(Integer age) { this.age = age; }
+
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
 }

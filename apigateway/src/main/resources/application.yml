@@ -28,9 +28,22 @@ spring:
             - Path=/api/auth/**
           filters:
             - StripPrefix=0
-
+  
 eureka:
   client:
     service-url:
       defaultZone: http://eurekaserver:8761/eureka
-      
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    urls:
+      - name: activity-service
+        url: http://localhost:8084/activity/v3/api-docs
+      - name: notification-service
+        url: http://localhost:8085/notification/v3/api-docs
+      - name: pet-service
+        url: http://localhost:8083/pet/v3/api-docs      
+      - name: user-service
+        url: http://localhost:8082/v3/api-docs
+    

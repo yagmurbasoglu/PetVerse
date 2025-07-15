@@ -16,3 +16,9 @@ spring:
     port: 5672
     username: guest
     password: guest
+
+springdoc:
+  api-docs:
+    path: /activity/v3/api-docs
+  swagger-ui:
+    path: /activity/swagger-ui.html

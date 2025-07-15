@@ -16,16 +16,18 @@ public class JwtService {
     private final JwtProperties jwtProperties;
     private final JwtEncoder jwtEncoder;
 
-    public String generateToken(String username) {
-        Instant now = Instant.now();
+public String generateToken(String username, String userId) {
+    Instant now = Instant.now();
 
-        JwtClaimsSet claims = JwtClaimsSet.builder()
-                .subject(username)
-                .issuer(jwtProperties.getIssuer())
-                .issuedAt(now)
-                .expiresAt(now.plus(jwtProperties.getTtl()))
-                .build();
+    JwtClaimsSet claims = JwtClaimsSet.builder()
+            .subject(username)
+            .issuer(jwtProperties.getIssuer())
+            .issuedAt(now)
+            .expiresAt(now.plus(jwtProperties.getTtl()))
+            .claim("userId", userId)
+            .build();
 
-        return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-    }
+    return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+}
+
 }

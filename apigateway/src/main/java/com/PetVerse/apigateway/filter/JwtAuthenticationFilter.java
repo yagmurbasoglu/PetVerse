@@ -26,9 +26,14 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         System.out.println("Request path: " + path);  // DEBUG log
 
         // /auth içeren endpoint'ler token istemesin
-        if (path.contains("/auth")) {
-            return chain.filter(exchange);
-        }
+        if (path.contains("/auth") ||
+    path.contains("/v3/api-docs") ||
+    path.contains("/swagger-ui") ||
+    path.contains("/swagger-resources") ||
+    path.contains("/webjars") ||
+    path.contains("/api-docs")) {
+    return chain.filter(exchange);
+}
 
         // Authorization header kontrolü
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
@@ -42,10 +47,17 @@ public class JwtAuthenticationFilter implements GlobalFilter {
 
         try {
             Claims claims = jwtUtil.validateToken(token);
-            // X-User-Email header eklemesi (downstream servislerde kullanılabilir)
+
+            // 👇 Header'a user bilgileri ekle (id veya email)
+            String email = claims.getSubject();
+            String userId = claims.get("userId", String.class); // Eğer token içinde varsa
+
             exchange = exchange.mutate()
-                    .request(builder -> builder.header("X-User-Email", claims.getSubject()))
+                    .request(builder -> builder
+                        .header("X-User-Email", email)
+                        .header("X-User-Id", userId != null ? userId : ""))
                     .build();
+                           
         } catch (JwtException e) {
             // JWT parsing veya doğrulama hatası
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
