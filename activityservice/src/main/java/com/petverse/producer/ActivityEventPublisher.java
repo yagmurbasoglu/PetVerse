@@ -11,8 +11,8 @@ public class ActivityEventPublisher {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void publish(String message) {
-        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.ROUTING_KEY, message);
-        System.out.println("Event gönderildi: " + message);
+    public void publish(NotificationEvent event) {
+        rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE, RabbitMQConfig.ROUTING_KEY, event);
+        System.out.println("Event gönderildi: " + event);
     }
 }
