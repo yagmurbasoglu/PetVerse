@@ -29,7 +29,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
 
 eureka:
   client:
@@ -42,4 +46,4 @@ springdoc:
   api-docs:
     path: /notification/v3/api-docs
   swagger-ui:
-    path: /notification/swagger-ui.html
+    path: /notification/swagger-ui.html    

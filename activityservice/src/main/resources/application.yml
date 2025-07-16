@@ -31,3 +31,12 @@ springdoc:
     path: /activity/v3/api-docs
   swagger-ui:
     path: /activity/swagger-ui.html
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always

@@ -2,9 +2,19 @@ server:
   port: 8888
 
 spring:
+  profiles:
+    active: native
   cloud:
     config:
       server:
-        git:
-          uri: file:///C:/Users/sedan/PetVerse/petverse-config-repo
-          default-label: master
+        native:
+          search-locations: file:///C:/Users/Projects/PetVerse/petverse-config-repo
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always

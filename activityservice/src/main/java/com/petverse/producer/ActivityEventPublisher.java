@@ -5,6 +5,8 @@ import com.petverse.dto.NotificationEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
+import com.petverse.dto.NotificationEvent;
+
 
 @Component
 @RequiredArgsConstructor

@@ -41,7 +41,7 @@ spring:
           predicates:
             - Path=/api/notifications/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=1   
 
   
 eureka:
@@ -62,3 +62,11 @@ springdoc:
       - name: user-service
         url: http://localhost:8082/v3/api-docs
     
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
