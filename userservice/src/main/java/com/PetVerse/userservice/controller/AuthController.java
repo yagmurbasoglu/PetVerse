@@ -5,6 +5,8 @@ import com.petverse.userservice.model.User;
 import com.petverse.userservice.service.AuthenticationService;
 import com.petverse.userservice.service.UserService;
 import com.petverse.userservice.security.JwtService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,17 @@ public class AuthController {
     private final AuthenticationService authenticationService;
     private final UserService userService;
     private final JwtService jwtService;
+    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDto userDto) {
+        logger.info("🔐 Login denemesi: {}", userDto.getEmail());
         String token = authenticationService.login(userDto);
+        logger.info("✅ Login başarılı: {}", userDto.getEmail());
         return ResponseEntity.ok(token);
     }
+
 
     @PostMapping("/register")
     public ResponseEntity<String> register(@RequestBody UserDto userDto) {

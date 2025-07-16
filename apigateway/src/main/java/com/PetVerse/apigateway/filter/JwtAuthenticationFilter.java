@@ -32,6 +32,7 @@ public class JwtAuthenticationFilter implements GlobalFilter {
             path.contains("/swagger-ui") ||
             path.contains("/swagger-resources") ||
             path.contains("/webjars") ||
+            path.contains("/api/auth/email") ||
             path.contains("/api-docs")) {
             return chain.filter(exchange);
         }

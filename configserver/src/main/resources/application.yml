@@ -8,7 +8,8 @@ spring:
     config:
       server:
         native:
-          search-locations: file:///C:/Users/Projects/PetVerse/petverse-config-repo
+          search-locations: file:///C:/Users/sedan/IdeaProjects/PetVerse/petverse-config-repo
+
 
 management:
   endpoints:
