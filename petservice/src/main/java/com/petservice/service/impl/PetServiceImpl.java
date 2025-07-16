@@ -30,7 +30,7 @@ public class PetServiceImpl implements PetService {
         return convertToDTO(saved);
     }
 
-    // ✅ Kullanıcı sadece kendi pet'ini getirebilir
+    // Kullanıcı sadece kendi pet'ini getirebilir
     @Override
     public PetDTO getPetById(Long id, Long userId) {
         Pet pet = petRepository.findById(id)
@@ -51,7 +51,7 @@ public class PetServiceImpl implements PetService {
                 .collect(Collectors.toList());
     }
 
-    // ✅ Pet güncelleme (kontrolü Controller'da yapılıyor)
+    // Pet güncelleme (kontrolü Controller'da yapılıyor)
     @Override
     public PetDTO updatePet(Long id, PetDTO dto) {
         Pet existingPet = petRepository.findById(id)
@@ -66,7 +66,7 @@ public class PetServiceImpl implements PetService {
         return convertToDTO(updated);
     }
 
-    // ✅ Silme işlemi sadece kendi pet'i için yapılabilir
+    // Silme işlemi sadece kendi pet'i için yapılabilir
     @Override
     public void deletePet(Long id, Long userId) {
         Pet pet = petRepository.findById(id)
@@ -79,7 +79,7 @@ public class PetServiceImpl implements PetService {
         petRepository.deleteById(id);
     }
 
-    // ✅ Kullanıcının tüm pet'lerini getir
+    // Kullanıcının tüm pet'lerini getir
     @Override
     public List<PetDTO> getPetsByUserId(String userId) {
         Long id = Long.parseLong(userId);

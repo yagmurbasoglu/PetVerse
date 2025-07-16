@@ -22,7 +22,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     @Override
     public Activity createActivity(Activity activity, String userId) {
-        // 🛡️ Güvenlik: pet gerçekten bu kullanıcıya mı ait?
+        // Güvenlik: pet gerçekten bu kullanıcıya mı ait?
         PetDTO pet = petServiceClient.getPetById(activity.getPetId());
 
         if (!pet.getUserId().equals(Long.parseLong(userId))) {
@@ -33,11 +33,11 @@ public class ActivityServiceImpl implements ActivityService {
         activity.setUserId(Long.parseLong(userId));
         Activity saved = activityRepository.save(activity);
 
-        // 📨 Bildirim event'ini oluştur ve gönder
+        // Bildirim event'ini oluştur ve gönder
         NotificationEvent event = new NotificationEvent(
-            saved.getType(),         // Örn: "FEEDING", "WALK", "DRINK"
-            saved.getDescription(),  // Açıklama
-            userId                   // JWT'den gelen kullanıcı ID'si
+            saved.getType(),
+            saved.getDescription(),
+            userId
         );
 
         publisher.publish(event);

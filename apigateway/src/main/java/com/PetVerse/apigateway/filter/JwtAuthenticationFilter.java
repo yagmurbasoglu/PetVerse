@@ -28,15 +28,16 @@ public class JwtAuthenticationFilter implements GlobalFilter {
 
         if (path.contains("/api/auth") ||
             path.contains("/auth") ||
-    path.contains("/v3/api-docs") ||
-    path.contains("/swagger-ui") ||
-    path.contains("/swagger-resources") ||
-    path.contains("/webjars") ||
-    path.contains("/api-docs")) {
-    return chain.filter(exchange);
-}
+            path.contains("/v3/api-docs") ||
+            path.contains("/swagger-ui") ||
+            path.contains("/swagger-resources") ||
+            path.contains("/webjars") ||
+            path.contains("/api-docs")) {
+            return chain.filter(exchange);
+        }
 
-        // Authorization header kontrolü
+        //Authorization header kontrolü
+        //Header yoksa veya Bearer ile başlamıyorsa 401 UNAUTHORIZED döner.
         String authHeader = exchange.getRequest().getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
@@ -48,10 +49,12 @@ public class JwtAuthenticationFilter implements GlobalFilter {
         try {
             Claims claims = jwtUtil.validateToken(token);
 
-            // 👇 Header'a user bilgileri ekle (id veya email)
+            // Header'a user bilgileri ekle (id veya email)
             String email = claims.getSubject();
             String userId = claims.get("userId", String.class); // Eğer token içinde varsa
 
+            //Token’dan çıkan email ve userId bilgilerini header olarak ekler.
+            //Böylece arkadaki mikroservisler bu bilgileri JWT çözmeden kullanabilir.
             exchange = exchange.mutate()
                     .request(builder -> builder
                         .header("X-User-Email", email)

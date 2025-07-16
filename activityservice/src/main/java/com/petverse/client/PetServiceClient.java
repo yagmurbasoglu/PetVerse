@@ -8,7 +8,7 @@ import com.petverse.config.FeignInterceptorConfig;
 
 @FeignClient(
     name = "petservice",
-    configuration = FeignInterceptorConfig.class // ⭐ Buraya dikkat
+    configuration = FeignInterceptorConfig.class
 )
 public interface PetServiceClient {
     @GetMapping("/pets/{id}")

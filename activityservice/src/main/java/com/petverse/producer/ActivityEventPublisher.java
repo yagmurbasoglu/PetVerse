@@ -1,6 +1,7 @@
 package com.petverse.producer;
 
 import com.petverse.config.RabbitMQConfig;
+import com.petverse.dto.NotificationEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;

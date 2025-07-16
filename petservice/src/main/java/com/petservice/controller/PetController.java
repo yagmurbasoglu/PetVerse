@@ -17,7 +17,7 @@ public class PetController {
         this.petService = petService;
     }
 
-    // ✅ Pet oluştur - token'daki kullanıcıya atanır
+    // Pet oluştur - token'daki kullanıcıya atanır
     @PostMapping
     public ResponseEntity<PetDTO> createPet(
             @RequestBody PetDTO petDTO,
@@ -28,7 +28,7 @@ public class PetController {
         return ResponseEntity.ok(created);
     }
 
-    // ✅ Kullanıcı sadece kendi pet'ini görüntüleyebilir
+    // Kullanıcı sadece kendi pet'ini görüntüleyebilir
     @GetMapping("/{id}")
     public ResponseEntity<PetDTO> getPetById(
             @PathVariable Long id,
@@ -38,7 +38,7 @@ public class PetController {
         return ResponseEntity.ok(pet);
     }
 
-    // ✅ Kullanıcının tüm pet'lerini getir
+    // Kullanıcının tüm pet'lerini getir
     @GetMapping
     public ResponseEntity<List<PetDTO>> getUserPets(
             @RequestHeader("X-User-Id") String userId) {
@@ -46,19 +46,19 @@ public class PetController {
         return ResponseEntity.ok(pets);
     }
 
-    // ✅ Pet güncelleme — sadece sahibi güncelleyebilir
+    // Pet güncelleme — sadece sahibi güncelleyebilir
     @PutMapping("/{id}")
     public ResponseEntity<PetDTO> updatePet(
             @PathVariable Long id,
             @RequestBody PetDTO dto,
             @RequestHeader("X-User-Id") String userId
     ) {
-        dto.setUserId(Long.parseLong(userId)); // güvenlik için yeniden set
+        dto.setUserId(Long.parseLong(userId));
         PetDTO updated = petService.updatePet(id, dto);
         return ResponseEntity.ok(updated);
     }
 
-    // ✅ Pet silme — sadece sahibi silebilir
+    // Pet silme — sadece sahibi silebilir
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePet(
             @PathVariable Long id,

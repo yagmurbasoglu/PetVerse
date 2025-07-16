@@ -17,7 +17,7 @@ public class NotificationConsumer {
 
     @RabbitListener(queues = "activity_queue")
     public void handleActivity(NotificationEvent event) {
-        System.out.println("📥 NotificationService event aldı: " + event);
+        System.out.println("NotificationService event aldı: " + event);
 
         Notification notification = new Notification();
         notification.setType(event.getType());
@@ -27,6 +27,6 @@ public class NotificationConsumer {
 
         repository.save(notification);
 
-        System.out.println("✔ Notification kaydedildi: " + notification);
+        System.out.println("Notification kaydedildi: " + notification);
     }
 }

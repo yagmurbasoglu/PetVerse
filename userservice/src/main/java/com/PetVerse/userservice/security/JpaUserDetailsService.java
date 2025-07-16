@@ -19,7 +19,7 @@ public class JpaUserDetailsService implements UserDetailsService {
                 .map(user -> org.springframework.security.core.userdetails.User.builder()
                         .username(user.getUsername())
                         .password(user.getPassword())
-                        .roles("USER") // Basit rol, istersen veritabanı bazlı genişletebiliriz
+                        .roles("USER")
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException(
                         "Kullanıcı bulunamadı: " + username));

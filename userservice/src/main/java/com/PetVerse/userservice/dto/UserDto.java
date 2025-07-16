@@ -13,13 +13,12 @@ import lombok.NoArgsConstructor;
 public class UserDto {
 
     private String email;
-    private String password; // sadece girişte kullanılır
+    private String password;
     private String username;
 
-    // Kullanıcıdan DTO üretmek için constructor
     public UserDto(User user) {
         this.email = user.getEmail();
         this.username = user.getUsername();
-        this.password = ""; // Güvenlik gereği şifre asla dışarı verilmez
+        this.password = "";
     }
 }

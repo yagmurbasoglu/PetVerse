@@ -26,17 +26,17 @@ public class AuthController {
         return ResponseEntity.ok(token);
     }
 
-@PostMapping("/register")
-public ResponseEntity<String> register(@RequestBody UserDto userDto) {
-    User savedUser = userService.registerUser(userDto);
+    @PostMapping("/register")
+    public ResponseEntity<String> register(@RequestBody UserDto userDto) {
+        User savedUser = userService.registerUser(userDto);
 
-    String jwtToken = jwtService.generateToken(
-        savedUser.getUsername(),
-        savedUser.getId().toString()
-    );
+        String jwtToken = jwtService.generateToken(
+            savedUser.getUsername(),
+            savedUser.getId().toString()
+        );
 
-    return ResponseEntity.ok(jwtToken);
-}
+        return ResponseEntity.ok(jwtToken);
+    }
 
 
     @GetMapping("/email/{email}")

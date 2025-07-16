@@ -24,11 +24,10 @@ public class User implements UserDetails {
         private String username;
         private String password;
 
-    // ✅ UserDetails implementasyonu
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList(); // veya rol varsa onu burada ver
+        return Collections.emptyList(); // rol
     }
 
     @Override

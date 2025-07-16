@@ -37,3 +37,9 @@ eureka:
       defaultZone: http://eurekaserver:8761/eureka
   instance:
     prefer-ip-address: true
+
+springdoc:
+  api-docs:
+    path: /notification/v3/api-docs
+  swagger-ui:
+    path: /notification/swagger-ui.html

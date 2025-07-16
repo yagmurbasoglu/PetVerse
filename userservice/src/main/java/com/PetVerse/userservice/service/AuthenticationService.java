@@ -17,7 +17,7 @@ public class AuthenticationService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
-    private final UserService userService; // 🔥 bunu ekle
+    private final UserService userService;
 
 public String login(UserDto userDto) {
     Authentication authentication = authenticationManager.authenticate(
