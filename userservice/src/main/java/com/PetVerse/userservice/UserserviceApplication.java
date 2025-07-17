@@ -8,7 +8,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication(scanBasePackages = "com.petverse.userservice")
 @EnableDiscoveryClient
-@EnableConfigurationProperties(JwtProperties.class) // 🔑 Bunu ekliyoruz
+@EnableConfigurationProperties(JwtProperties.class) //Bunu ekliyoruz
 public class UserserviceApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserserviceApplication.class, args);

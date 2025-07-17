@@ -26,9 +26,9 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody UserDto userDto) {
-        logger.info("🔐 Login denemesi: {}", userDto.getEmail());
+        logger.info("Login denemesi: {}", userDto.getEmail());
         String token = authenticationService.login(userDto);
-        logger.info("✅ Login başarılı: {}", userDto.getEmail());
+        logger.info("Login başarılı: {}", userDto.getEmail());
         return ResponseEntity.ok(token);
     }
 
