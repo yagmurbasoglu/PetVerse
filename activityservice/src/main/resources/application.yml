@@ -47,3 +47,21 @@ management:
       prometheus:
         enabled: true
 
+resilience4j:
+  circuitbreaker:
+    instances:
+      petService:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED     # Bu önemli! WİNDOw tipini COUNT yaptık
+        slidingWindowSize: 1               # 👉 Sadece 1 çağrıyla karar ver
+        minimumNumberOfCalls: 1            # 👉 İlk çağrıda devreye gir
+        failureRateThreshold: 100            # 👉 %100 hata = OPEN
+        waitDurationInOpenState: 5s        # 👉 5 saniye sonra tekrar dene
+        permittedNumberOfCallsInHalfOpenState: 1 # 👉 1 denemeyle karar ver
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        recordExceptions:
+          - java.lang.Exception
+          - java.lang.RuntimeException
+          - feign.FeignException
+          - feign.FeignException$ServiceUnavailable
+          - org.springframework.web.server.ResponseStatusException
