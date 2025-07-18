@@ -8,6 +8,11 @@ spring:
     web-application-type: reactive
   config:
     import: optional:configserver:http://configserver:8888
+  data:
+    redis:
+      host: redis
+      port: 6379
+
   cloud:
     gateway:
       discovery:
@@ -20,30 +25,54 @@ spring:
           predicates:
             - Path=/api/pets/**
           filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 3
+                key-resolver: "#{@userKeyResolver}"
             - StripPrefix=1
+
 
         - id: userservice
           uri: lb://userservice
           predicates:
             - Path=/api/auth/**
           filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 3
+                redis-rate-limiter.burstCapacity: 5
+                key-resolver: "#{@ipKeyResolver}"
             - StripPrefix=0
+
 
         - id: activityservice
           uri: lb://activityservice
           predicates:
             - Path=/api/activities/**
           filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 5
+                redis-rate-limiter.burstCapacity: 10
+                key-resolver: "#{@userKeyResolver}"
             - StripPrefix=1
+
 
         - id: notificationservice
           uri: lb://notificationservice
           predicates:
             - Path=/api/notifications/**
           filters:
-            - StripPrefix=1   
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 2
+                redis-rate-limiter.burstCapacity: 3
+                key-resolver: "#{@userKeyResolver}"
+            - StripPrefix=1
 
-  
+
+
 eureka:
   client:
     service-url:
@@ -71,8 +100,4 @@ management:
     health:
       show-details: always
     prometheus:
-      enabled: true  
-  metrics:
-    export:
-      prometheus:
-        enabled: true
+      enabled: true

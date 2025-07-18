@@ -118,8 +118,16 @@ services:
     networks:
       - petverse-net
     volumes:
-    - grafana-storage:/var/lib/grafana  
-      
+    - grafana-storage:/var/lib/grafana
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - petverse-net
+
 networks:
   petverse-net:
     driver: bridge
