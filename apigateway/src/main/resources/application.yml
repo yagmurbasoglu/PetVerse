@@ -71,6 +71,19 @@ spring:
                 key-resolver: "#{@userKeyResolver}"
             - StripPrefix=1
 
+        - id: weatherservice
+          uri: lb://weatherservice
+          predicates:
+            - Path=/api/weather/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 3
+                redis-rate-limiter.burstCapacity: 6
+                key-resolver: "#{@userKeyResolver}"
+            - StripPrefix=1
+
+
 
 
 eureka:

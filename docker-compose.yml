@@ -75,6 +75,18 @@ services:
     networks:
       - petverse-net
 
+  weatherservice:
+    build:
+      context: ./weatherservice
+    ports:
+      - "8086:8086"
+    depends_on:
+      - configserver
+      - eurekaserver
+    networks:
+      - petverse-net
+
+
 
   postgres:
     image: postgres:15
