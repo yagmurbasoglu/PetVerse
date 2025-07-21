@@ -7,6 +7,8 @@ services:
       context: ./eurekaserver
     ports:
       - "8761:8761"
+    environment:
+      - TZ=Europe/Istanbul
     networks:
       - petverse-net
     volumes:
@@ -19,6 +21,8 @@ services:
       - "8888:8888"
     depends_on:
       - eurekaserver
+    environment:
+      - TZ=Europe/Istanbul
     networks:
       - petverse-net
     volumes:
@@ -32,6 +36,8 @@ services:
     depends_on:
       - postgres
       - rabbitmq
+    environment:
+      - TZ=Europe/Istanbul
     networks:
       - petverse-net
     volumes:
@@ -45,6 +51,8 @@ services:
     depends_on:
       - configserver
       - eurekaserver
+    environment:
+      - TZ=Europe/Istanbul
     networks:
       - petverse-net
     volumes:
@@ -58,6 +66,8 @@ services:
     depends_on:
       - configserver
       - postgres
+    environment:
+      - TZ=Europe/Istanbul
     networks:
       - petverse-net
     volumes:
@@ -71,6 +81,8 @@ services:
     depends_on:
       - configserver
       - postgres
+    environment:
+      - TZ=Europe/Istanbul
     networks:
       - petverse-net
     volumes:
@@ -84,6 +96,8 @@ services:
     depends_on:
       - rabbitmq
       - postgres
+    environment:
+      - TZ=Europe/Istanbul
     networks:
       - petverse-net
     volumes:
@@ -111,7 +125,36 @@ services:
       - "15672:15672"
     networks:
       - petverse-net
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.13.4
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m  # Bellek sınırı burada
+    ports:
+      - "9200:9200"
 
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.13.4
+    container_name: logstash
+    volumes:
+      - ./logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - ./logs:/app/logs
+
+    depends_on:
+      - elasticsearch
+
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.13.4
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
 networks:
   petverse-net:
     driver: bridge
