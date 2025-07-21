@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class ActivityServiceImpl implements ActivityService {
     private final PetServiceClient petServiceClient;
 
     @Override
+    @CircuitBreaker(name = "petService", fallbackMethod = "handlePetServiceFailure")
     public Activity createActivity(Activity activity, String userId) {
         // Güvenlik: pet gerçekten bu kullanıcıya mı ait?
         PetDTO pet = petServiceClient.getPetById(activity.getPetId());
@@ -44,4 +46,12 @@ public class ActivityServiceImpl implements ActivityService {
 
         return saved;
     }
+
+public Activity handlePetServiceFailure(Activity activity, String userId, Throwable t) {
+    System.out.println("🔴 FALLBACK çalıştı! PetService devre dışı: " + t.getMessage());
+
+    throw new RuntimeException(
+        "PetService şu anda ulaşılamıyor. Lütfen daha sonra tekrar deneyin.");
+}
+
 }
