@@ -19,7 +19,7 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-
+# Maven Build Adımları
       - name: Build userservice
         working-directory: ./userservice
         run: mvn clean install -DskipTests
@@ -47,3 +47,24 @@ jobs:
       - name: Build petservice
         working-directory: ./petservice
         run: mvn clean install -DskipTests
+# Docker Build Adımları
+      - name: Docker build - userservice
+        run: docker build -t userservice:latest ./userservice
+
+      - name: Docker build - activityservice
+        run: docker build -t activityservice:latest ./activityservice
+
+      - name: Docker build - notificationservice
+        run: docker build -t notificationservice:latest ./notificationservice
+
+      - name: Docker build - apigateway
+        run: docker build -t apigateway:latest ./apigateway
+
+      - name: Docker build - configserver
+        run: docker build -t configserver:latest ./configserver
+
+      - name: Docker build - eurekaserver
+        run: docker build -t eurekaserver:latest ./eurekaserver
+
+      - name: Docker build - petservice
+        run: docker build -t petservice:latest ./petservice
