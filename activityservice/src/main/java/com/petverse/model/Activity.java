@@ -15,9 +15,11 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String type;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type")
+    private ActivityType type;
+
     private String description;
     private Long userId;
     private Long petId;
-
 }
