@@ -20,5 +20,30 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 
-      - name: Build with Maven
+      - name: Build userservice
+        working-directory: ./userservice
+        run: mvn clean install -DskipTests
+
+      - name: Build activityservice
+        working-directory: ./activityservice
+        run: mvn clean install -DskipTests
+
+      - name: Build notificationservice
+        working-directory: ./notificationservice
+        run: mvn clean install -DskipTests
+
+      - name: Build apigateway
+        working-directory: ./apigateway
+        run: mvn clean install -DskipTests
+
+      - name: Build configserver
+        working-directory: ./configserver
+        run: mvn clean install -DskipTests
+
+      - name: Build eurekaserver
+        working-directory: ./eurekaserver
+        run: mvn clean install -DskipTests
+
+      - name: Build petservice
+        working-directory: ./petservice
         run: mvn clean install -DskipTests
