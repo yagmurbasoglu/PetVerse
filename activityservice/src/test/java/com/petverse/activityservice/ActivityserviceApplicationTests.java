@@ -1,22 +1,19 @@
-@Testcontainers
-@SpringBootTest
-@ContextConfiguration(initializers = ActivityServiceIntegrationTest.DockerPostgresInitializer.class)
-public class ActivityserviceApplicationTests {
+package com.petverse.activityservice;
 
-    @Container
-    static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
-            .withDatabaseName("testdb")
-            .withUsername("test")
-            .withPassword("test");
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-    @DynamicPropertySource
-    static void overrideProps(DynamicPropertyRegistry registry) {
-        registry.add("spring.datasource.url", postgres::getJdbcUrl);
-        registry.add("spring.datasource.username", postgres::getUsername);
-        registry.add("spring.datasource.password", postgres::getPassword);
-    }
 
-    @Test
-    void contextLoads() {
-    }
+@SpringBootTest(properties = {
+  "spring.datasource.url=jdbc:postgresql://localhost:5432/petcaredb",
+  "spring.datasource.username=admin",
+  "spring.datasource.password=admin123",
+  "spring.jpa.hibernate.ddl-auto=none"
+})
+class ActivityserviceApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
 }
