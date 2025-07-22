@@ -25,7 +25,7 @@ eureka:
   instance:
     prefer-ip-address: true
     hostname: activityservice
-    
+
 springdoc:
   api-docs:
     path: /activity/v3/api-docs
@@ -41,7 +41,7 @@ management:
     health:
       show-details: always
     prometheus:
-      enabled: true  
+      enabled: true
   metrics:
     export:
       prometheus:
@@ -52,12 +52,12 @@ resilience4j:
     instances:
       petService:
         registerHealthIndicator: true
-        slidingWindowType: COUNT_BASED     # Bu önemli! WİNDOw tipini COUNT yaptık
-        slidingWindowSize: 1               # 👉 Sadece 1 çağrıyla karar ver
-        minimumNumberOfCalls: 1            # 👉 İlk çağrıda devreye gir
-        failureRateThreshold: 100            # 👉 %100 hata = OPEN
-        waitDurationInOpenState: 5s        # 👉 5 saniye sonra tekrar dene
-        permittedNumberOfCallsInHalfOpenState: 1 # 👉 1 denemeyle karar ver
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 1
+        minimumNumberOfCalls: 1
+        failureRateThreshold: 100
+        waitDurationInOpenState: 5s
+        permittedNumberOfCallsInHalfOpenState: 1
         automaticTransitionFromOpenToHalfOpenEnabled: true
         recordExceptions:
           - java.lang.Exception
@@ -65,3 +65,4 @@ resilience4j:
           - feign.FeignException
           - feign.FeignException$ServiceUnavailable
           - org.springframework.web.server.ResponseStatusException
+

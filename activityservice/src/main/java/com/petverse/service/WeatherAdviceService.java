@@ -1,6 +1,6 @@
-package com.petverse.weatherservice.service;
+package com.petverse.service;
 
-import com.petverse.weatherservice.model.WeatherResponse;
+import com.petverse.dto.WeatherResponse;
 import org.springframework.stereotype.Service;
 
 @Service
