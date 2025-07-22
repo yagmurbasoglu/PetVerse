@@ -27,9 +27,9 @@ public class ActivityServiceIntegrationTest {
 
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
-            .withDatabaseName("petcaredb")
-            .withUsername("admin")
-            .withPassword("admin123");
+            .withDatabaseName("testdb")
+            .withUsername("test")
+            .withPassword("test");
 
     static class DockerPostgresInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
         public void initialize(ConfigurableApplicationContext context) {
