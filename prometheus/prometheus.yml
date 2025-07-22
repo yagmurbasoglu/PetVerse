@@ -5,25 +5,25 @@ scrape_configs:
   - job_name: 'activityservice'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['activityservice:8084']
+      - targets: ['host.docker.internal:8084']
 
 
   - job_name: 'apigateway'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['apigateway:8080'] 
+      - targets: ['host.docker.internal:8080'] 
 
   - job_name: 'notificationservice'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['notificationservice:8085']
+      - targets: ['host.docker.internal:8085']
 
   - job_name: 'petservice'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['petservice:8083']
+      - targets: ['host.docker.internal:8083']
 
   - job_name: 'userservice'
     metrics_path: '/actuator/prometheus'
     static_configs:
-      - targets: ['userservice:8082']
+      - targets: ['host.docker.internal:8082']

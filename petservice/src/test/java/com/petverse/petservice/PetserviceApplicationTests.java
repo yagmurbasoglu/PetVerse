@@ -1,4 +1,4 @@
-package com.petverse.notificationservice;
+package com.petverse.petservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -7,10 +7,11 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import com.petservice.PetserviceApplication;
 
 @Testcontainers
-@SpringBootTest(classes = NotificationServiceApplication.class)
-public class NotificationserviceApplicationTests {
+@SpringBootTest(classes = com.petservice.PetserviceApplication.class)
+public class PetserviceApplicationTests {
 
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
