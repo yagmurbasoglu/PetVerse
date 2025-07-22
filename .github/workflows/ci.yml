@@ -24,10 +24,6 @@ jobs:
         working-directory: ./userservice
         run: mvn clean install 
 
-      - name: Build activityservice
-        working-directory: ./activityservice
-        run: mvn clean install 
-
       - name: Build notificationservice
         working-directory: ./notificationservice
         run: mvn clean install 
@@ -45,6 +41,10 @@ jobs:
 
       - name: Build petservice
         working-directory: ./petservice
+        run: mvn clean install 
+
+      - name: Build activityservice
+        working-directory: ./activityservice
         run: mvn clean install 
 # Docker Build Adımları
       - name: Docker build - userservice

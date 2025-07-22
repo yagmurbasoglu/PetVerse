@@ -113,12 +113,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        
-        <dependency>
-    <groupId>javax.xml.bind</groupId>
-    <artifactId>jaxb-api</artifactId>
-    <version>2.4.0-b180830.0359</version>
-</dependency>
 
 <!-- Testcontainers -->
 <dependency>
@@ -188,14 +182,6 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-surefire-plugin</artifactId>
-    <version>2.19.1</version>
-    <configuration>
-        <testFailureIgnore>true</testFailureIgnore>
-    </configuration>
-</plugin>
         </plugins>
     </build>
 
