@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
 @SpringBootTest
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class) // <-- Bu EKLENDİ
 public class PetServiceIntegrationTest {
 
     @Container
@@ -48,7 +48,6 @@ public class PetServiceIntegrationTest {
     @Order(1)
     void shouldSavePetToRealPostgres() {
         PetDTO dto = new PetDTO(null, "Testy", "Dog", 3, 100L);
-
         PetDTO saved = petService.createPet(dto);
         petId = saved.getId();
 
