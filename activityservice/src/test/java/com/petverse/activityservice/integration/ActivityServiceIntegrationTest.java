@@ -10,6 +10,8 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import com.petverse.model.ActivityType;
+
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class ActivityServiceIntegrationTest {
     @Test
     void shouldPersistAndReadActivity() {
         Activity activity = Activity.builder()
-                .type("feed")
+                .type(ActivityType.FEED)
                 .description("Mama verildi")
                 .userId(1L)
                 .petId(2L)

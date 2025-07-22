@@ -6,6 +6,7 @@ public enum ActivityType {
     FEED,
     WALK,
     PLAY,
+    RUN,
     SLEEP,
     BATH;
 
