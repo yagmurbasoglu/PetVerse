@@ -20,8 +20,21 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
 # Maven Build Adımları
+
+
+      - name: Build configserver
+        working-directory: ./configserver
+        run: mvn clean install 
+      - name: Build eurekaserver
+        working-directory: ./eurekaserver
+        run: mvn clean install 
+        
       - name: Build userservice
         working-directory: ./userservice
+        run: mvn clean install 
+
+      - name: Build activityservice
+        working-directory: ./activityservice
         run: mvn clean install 
 
       - name: Build notificationservice
@@ -32,19 +45,8 @@ jobs:
         working-directory: ./apigateway
         run: mvn clean install 
 
-      - name: Build configserver
-        working-directory: ./configserver
-        run: mvn clean install 
-      - name: Build eurekaserver
-        working-directory: ./eurekaserver
-        run: mvn clean install 
-
       - name: Build petservice
         working-directory: ./petservice
-        run: mvn clean install 
-
-      - name: Build activityservice
-        working-directory: ./activityservice
         run: mvn clean install 
 # Docker Build Adımları
       - name: Docker build - userservice
