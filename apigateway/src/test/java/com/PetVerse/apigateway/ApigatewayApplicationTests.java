@@ -3,7 +3,12 @@ package com.petverse.apigateway;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(properties = {
+  "spring.datasource.url=jdbc:postgresql://localhost:5432/petcaredb",
+  "spring.datasource.username=admin",
+  "spring.datasource.password=admin123",
+  "spring.jpa.hibernate.ddl-auto=update"
+})
 class ApigatewayApplicationTests {
 
 	@Test

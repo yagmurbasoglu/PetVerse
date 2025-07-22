@@ -2,9 +2,9 @@ name: PetVerse CI Pipeline
 
 on:
   push:
-    branches: [ develop, feature/PT-2-github-actions-cicd ]
+    branches: [ develop , feature/**]
   pull_request:
-    branches: [ develop, feature/PT-2-github-actions-cicd ]
+    branches: [ develop, feature/**]
 
 jobs:
   build:
@@ -22,31 +22,30 @@ jobs:
 # Maven Build Adımları
       - name: Build userservice
         working-directory: ./userservice
-        run: mvn clean install -DskipTests
+        run: mvn clean install 
 
       - name: Build activityservice
         working-directory: ./activityservice
-        run: mvn clean install -DskipTests
+        run: mvn clean install 
 
       - name: Build notificationservice
         working-directory: ./notificationservice
-        run: mvn clean install -DskipTests
+        run: mvn clean install 
 
       - name: Build apigateway
         working-directory: ./apigateway
-        run: mvn clean install -DskipTests
+        run: mvn clean install 
 
       - name: Build configserver
         working-directory: ./configserver
-        run: mvn clean install -DskipTests
-
+        run: mvn clean install 
       - name: Build eurekaserver
         working-directory: ./eurekaserver
-        run: mvn clean install -DskipTests
+        run: mvn clean install 
 
       - name: Build petservice
         working-directory: ./petservice
-        run: mvn clean install -DskipTests
+        run: mvn clean install 
 # Docker Build Adımları
       - name: Docker build - userservice
         run: docker build -t userservice:latest ./userservice
