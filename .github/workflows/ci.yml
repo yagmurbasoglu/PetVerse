@@ -25,7 +25,7 @@ jobs:
       - name: Build configserver
         working-directory: ./configserver
         run: mvn clean install 
-        
+
       - name: Build eurekaserver
         working-directory: ./eurekaserver
         run: mvn clean install 
