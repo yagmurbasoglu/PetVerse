@@ -2,9 +2,9 @@ name: PetVerse CI Pipeline
 
 on:
   push:
-    branches: [ develop, feature/PT-3-junit-testcontainers]
+    branches: [ develop , feature/**]
   pull_request:
-    branches: [ develop, feature/PT-3-junit-testcontainers]
+    branches: [ develop, feature/**]
 
 jobs:
   build:
@@ -25,13 +25,14 @@ jobs:
       - name: Build configserver
         working-directory: ./configserver
         run: mvn clean install 
+
       - name: Build eurekaserver
         working-directory: ./eurekaserver
         run: mvn clean install 
         
       - name: Build userservice
         working-directory: ./userservice
-        run: mvn clean install -DskipTests
+        run: mvn clean install 
 
       - name: Build activityservice
         working-directory: ./activityservice
@@ -97,4 +98,3 @@ jobs:
       - name: Push petservice image
         run: docker tag petservice:latest yagmurbasoglu/petservice:latest && docker push yagmurbasoglu/petservice:latest
      
-
