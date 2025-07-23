@@ -19,19 +19,19 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final UserService userService;
 
-public String login(UserDto userDto) {
-    Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword())
-    );
+    public String login(UserDto userDto) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(userDto.getUsername(), userDto.getPassword())
+        );
 
-    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-    // Email'den kullanıcıyı çek
-    User user = userService.findByEmail(userDetails.getUsername())
-            .orElseThrow(() -> new RuntimeException("User not found"));
+        // Email'den kullanıcıyı çek
+        User user = userService.findByEmail(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
-    // Yeni token: username + userId
-    return jwtService.generateToken(user.getEmail(), user.getId().toString());
-}
+        // Yeni token: username + userId
+        return jwtService.generateToken(user.getEmail(), user.getId().toString());
+    }
 
 }

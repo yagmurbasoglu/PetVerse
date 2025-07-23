@@ -1,4 +1,4 @@
-package com.petverse.apigateway.filter;
+package com.PetVerse.apigateway.filter;
 
 import com.petverse.apigateway.util.JwtUtil;
 import io.jsonwebtoken.Claims;

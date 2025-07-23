@@ -31,8 +31,9 @@ echo.
 echo ============================================
 echo [✓] Tum servisler basariyla derlendi.
 echo.
-echo [Not] Docker imajlarini build edip baslatmak icin su komutu manuel calistirin:
-echo docker compose up --build
+#echo [Not] Docker imajlarini build edip baslatmak icin su komutu manuel calistirin:
+#echo docker compose up --build
+docker compose up --build
 echo ============================================
 
 pause
