@@ -26,4 +26,3 @@ public class WeatherController {
         throw new IllegalArgumentException("Desteklenmeyen şehir: " + city);
     }
 }
-
