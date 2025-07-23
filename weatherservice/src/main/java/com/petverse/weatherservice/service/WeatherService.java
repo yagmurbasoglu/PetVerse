@@ -26,6 +26,6 @@ public class WeatherService {
     }
 
     public WeatherResponse getAnkaraWeather() {
-        return getWeather(37.5833, 43.7333); // Amsterdam koordinatları (daha serin test için)
+        return getWeather(39.9208, 32.8541);
     }
 }
