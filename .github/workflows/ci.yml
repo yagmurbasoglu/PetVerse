@@ -25,7 +25,7 @@ jobs:
       # Configserver
       - name: Build configserver
         working-directory: ./configserver
-        run: mvn clean install 
+        run: mvn clean verify 
 
       - name: SonarCloud Analysis - configserver
         working-directory: ./configserver
@@ -35,12 +35,13 @@ jobs:
           mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
            -Dsonar.projectKey=yagmurbasoglu_PetVerse \
            -Dsonar.organization=yagmurbasoglu \
-           -Dsonar.host.url=https://sonarcloud.io
+           -Dsonar.host.url=https://sonarcloud.io \
+           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
   
       # Eurekaserver
       - name: Build eurekaserver
         working-directory: ./eurekaserver
-        run: mvn clean install 
+        run: mvn clean verify 
       
       - name: SonarCloud Analysis - eurekaserver
         working-directory: ./eurekaserver
@@ -50,12 +51,13 @@ jobs:
           mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
            -Dsonar.projectKey=yagmurbasoglu_PetVerse \
            -Dsonar.organization=yagmurbasoglu \
-           -Dsonar.host.url=https://sonarcloud.io
+           -Dsonar.host.url=https://sonarcloud.io \
+           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       # userservice        
       - name: Build userservice
         working-directory: ./userservice
-        run: mvn clean install 
+        run: mvn clean verify 
 
       - name: SonarCloud Analysis - userservice
         working-directory: ./userservice
@@ -65,12 +67,13 @@ jobs:
           mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
            -Dsonar.projectKey=yagmurbasoglu_PetVerse \
            -Dsonar.organization=yagmurbasoglu \
-           -Dsonar.host.url=https://sonarcloud.io
+           -Dsonar.host.url=https://sonarcloud.io \
+           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       # activityservice
       - name: Build activityservice
         working-directory: ./activityservice
-        run: mvn clean install 
+        run: mvn clean verify 
 
       - name: SonarCloud Analysis - activityservice
         working-directory: ./activityservice
@@ -80,12 +83,13 @@ jobs:
           mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
            -Dsonar.projectKey=yagmurbasoglu_PetVerse \
            -Dsonar.organization=yagmurbasoglu \
-           -Dsonar.host.url=https://sonarcloud.io
+           -Dsonar.host.url=https://sonarcloud.io \
+           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       # notificationservice
       - name: Build notificationservice
         working-directory: ./notificationservice
-        run: mvn clean install 
+        run: mvn clean verify 
 
       - name: SonarCloud Analysis - notificationservice
         working-directory: ./notificationservice
@@ -95,13 +99,14 @@ jobs:
           mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
            -Dsonar.projectKey=yagmurbasoglu_PetVerse \
            -Dsonar.organization=yagmurbasoglu \
-           -Dsonar.host.url=https://sonarcloud.io  
+           -Dsonar.host.url=https://sonarcloud.io \
+           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml 
 
 
       # apigateway
       - name: Build apigateway
         working-directory: ./apigateway
-        run: mvn clean install 
+        run: mvn clean verify 
 
       - name: SonarCloud Analysis - apigateway
         working-directory: ./apigateway
@@ -111,13 +116,14 @@ jobs:
           mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
            -Dsonar.projectKey=yagmurbasoglu_PetVerse \
            -Dsonar.organization=yagmurbasoglu \
-           -Dsonar.host.url=https://sonarcloud.io  
+           -Dsonar.host.url=https://sonarcloud.io \
+           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml 
 
 
       # petservice
       - name: Build petservice
         working-directory: ./petservice
-        run: mvn clean install 
+        run: mvn clean verify 
 
       - name: SonarCloud Analysis - petservice
         working-directory: ./petservice
@@ -127,7 +133,8 @@ jobs:
           mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
            -Dsonar.projectKey=yagmurbasoglu_PetVerse \
            -Dsonar.organization=yagmurbasoglu \
-           -Dsonar.host.url=https://sonarcloud.io  
+           -Dsonar.host.url=https://sonarcloud.io \
+           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
 # Docker Build Adımları
       - name: Docker build - userservice
