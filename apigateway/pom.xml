@@ -32,6 +32,15 @@
         <artifactId>spring-cloud-starter-gateway</artifactId>
     </dependency>
 
+        <!-- PostgreSQL -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.2</version> <!-- ⬅️ Bunu ekle -->
+            <scope>runtime</scope>
+        </dependency>
+
+
         <!-- Reactive Redis - Rate Limiting için zorunlu -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

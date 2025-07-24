@@ -9,7 +9,7 @@ echo [1] Docker servisleri kapatiliyor...
 docker compose down
 
 :: Fonksiyon: Maven build için alt klasörlere gir
-set SERVICES=activityservice apigateway configserver eurekaserver notificationservice petservice userservice
+set SERVICES=activityservice apigateway configserver eurekaserver notificationservice petservice userservice weatherservice
 
 echo.
 echo [2] Tum servisler Maven ile derleniyor...
@@ -18,7 +18,7 @@ for %%S in (%SERVICES%) do (
     echo Derleniyor: %%S
     echo --------------------------------------------
     cd %%S
-    call mvn clean install -DskipTests
+    call ./mvnw clean install -DskipTests
     if %errorlevel% neq 0 (
         echo [HATA] %%S derlenirken hata olustu!
         pause

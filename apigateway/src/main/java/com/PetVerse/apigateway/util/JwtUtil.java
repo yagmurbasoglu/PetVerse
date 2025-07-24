@@ -1,4 +1,4 @@
-package com.PetVerse.apigateway.util;
+package com.petverse.apigateway.util;
 
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;

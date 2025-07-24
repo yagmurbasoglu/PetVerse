@@ -1,55 +1,7 @@
-server:
-  port: 8085
-
 spring:
   application:
     name: notificationservice
-
-  datasource:
-    url: jdbc:postgresql://postgres:5432/petcaredb
-    username: admin
-    password: admin123
-    driver-class-name: org.postgresql.Driver
-
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-
-  rabbitmq:
-    host: rabbitmq
-    port: 5672
-    username: guest
-    password: guest
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, info, prometheus
-  endpoint:
-    health:
-      show-details: always
-    prometheus:
-      enabled: true  
-  metrics:
-    export:
-      prometheus:
-        enabled: true
-
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eurekaserver:8761/eureka
-  instance:
-    prefer-ip-address: true
-
-springdoc:
-  api-docs:
-    path: /notification/v3/api-docs
-  swagger-ui:
-    path: /notification/swagger-ui.html    
+  config:
+    import: optional:configserver:http://configserver:8888
+  profiles:
+    active: dev

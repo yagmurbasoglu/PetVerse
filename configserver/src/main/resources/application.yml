@@ -3,12 +3,14 @@ server:
 
 spring:
   profiles:
-    active: native
+    active: git
   cloud:
     config:
       server:
-        native:
-          search-locations: file:///C:/Users/Projects/PetVerse/petverse-config-repo
+        git:
+          uri: https://github.com/sedayhan934/petverse-config-repo.git
+          default-label: main
+          clone-on-start: true
 
 management:
   endpoints:
