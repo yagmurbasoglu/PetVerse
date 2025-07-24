@@ -42,10 +42,12 @@ jobs:
         working-directory: ./activityservice
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=yagmurbasoglu_PetVerse \
-          -Dsonar.organization=yagmurbasoglu \
-          -Dsonar.host.url=https://sonarcloud.io  
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+           -Dsonar.projectKey=yagmurbasoglu_PetVerse \
+           -Dsonar.organization=yagmurbasoglu \
+           -Dsonar.host.url=https://sonarcloud.io
+
 
       - name: Build notificationservice
         working-directory: ./notificationservice
