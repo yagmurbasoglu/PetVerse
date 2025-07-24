@@ -19,21 +19,55 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+
 # Maven Build Adımları
 
-
+      # Configserver
       - name: Build configserver
         working-directory: ./configserver
         run: mvn clean install 
 
+      - name: SonarCloud Analysis - configserver
+        working-directory: ./configserver
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+           -Dsonar.projectKey=yagmurbasoglu_PetVerse \
+           -Dsonar.organization=yagmurbasoglu \
+           -Dsonar.host.url=https://sonarcloud.io
+  
+      # Eurekaserver
       - name: Build eurekaserver
         working-directory: ./eurekaserver
         run: mvn clean install 
-        
+      
+      - name: SonarCloud Analysis - eurekaserver
+        working-directory: ./eurekaserver
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+           -Dsonar.projectKey=yagmurbasoglu_PetVerse \
+           -Dsonar.organization=yagmurbasoglu \
+           -Dsonar.host.url=https://sonarcloud.io
+
+      # userservice        
       - name: Build userservice
         working-directory: ./userservice
         run: mvn clean install 
 
+      - name: SonarCloud Analysis - userservice
+        working-directory: ./userservice
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+           -Dsonar.projectKey=yagmurbasoglu_PetVerse \
+           -Dsonar.organization=yagmurbasoglu \
+           -Dsonar.host.url=https://sonarcloud.io
+
+      # activityservice
       - name: Build activityservice
         working-directory: ./activityservice
         run: mvn clean install 
@@ -48,18 +82,53 @@ jobs:
            -Dsonar.organization=yagmurbasoglu \
            -Dsonar.host.url=https://sonarcloud.io
 
-
+      # notificationservice
       - name: Build notificationservice
         working-directory: ./notificationservice
         run: mvn clean install 
 
+      - name: SonarCloud Analysis - notificationservice
+        working-directory: ./notificationservice
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+           -Dsonar.projectKey=yagmurbasoglu_PetVerse \
+           -Dsonar.organization=yagmurbasoglu \
+           -Dsonar.host.url=https://sonarcloud.io  
+
+
+      # apigateway
       - name: Build apigateway
         working-directory: ./apigateway
         run: mvn clean install 
 
+      - name: SonarCloud Analysis - apigateway
+        working-directory: ./apigateway
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+           -Dsonar.projectKey=yagmurbasoglu_PetVerse \
+           -Dsonar.organization=yagmurbasoglu \
+           -Dsonar.host.url=https://sonarcloud.io  
+
+
+      # petservice
       - name: Build petservice
         working-directory: ./petservice
         run: mvn clean install 
+
+      - name: SonarCloud Analysis - petservice
+        working-directory: ./petservice
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+           -Dsonar.projectKey=yagmurbasoglu_PetVerse \
+           -Dsonar.organization=yagmurbasoglu \
+           -Dsonar.host.url=https://sonarcloud.io  
+
 # Docker Build Adımları
       - name: Docker build - userservice
         run: docker build -t userservice:latest ./userservice
