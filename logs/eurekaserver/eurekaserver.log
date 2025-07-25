@@ -1,0 +1,3 @@
+2025-07-25 07:45:55 WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-07-25 07:46:25 WARN  c.n.e.r.AbstractInstanceRegistry - DS: Registry: lease doesn't exist, registering resource: WEATHERSERVICE - ab5a316c7e77:weatherservice:8086
+2025-07-25 07:46:25 WARN  c.n.e.resources.InstanceResource - Not Found (Renew): WEATHERSERVICE - ab5a316c7e77:weatherservice:8086

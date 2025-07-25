@@ -1,0 +1,175 @@
+2025-07-25 07:45:35 WARN  o.s.c.c.c.ConfigServerConfigDataLoader - Could not locate PropertySource ([ConfigServerConfigDataResource@1c4ee95c uris = array<String>['http://configserver:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://configserver:8888/apigateway/default": Connection refused
+2025-07-25 07:45:35 WARN  o.s.c.c.c.ConfigServerConfigDataLoader - Could not locate PropertySource ([ConfigServerConfigDataResource@59221b97 uris = array<String>['http://configserver:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://configserver:8888/apigateway/default": Connection refused
+2025-07-25 07:45:35 WARN  o.s.c.c.c.ConfigServerConfigDataLoader - Could not locate PropertySource ([ConfigServerConfigDataResource@6ac4944a uris = array<String>['http://configserver:8888'], optional = true, profiles = 'default']): I/O error on GET request for "http://configserver:8888/apigateway/default": Connection refused
+2025-07-25 07:45:51 WARN  o.s.c.g.c.GatewayClassPathWarningAutoConfiguration - 
+
+**********************************************************
+
+The artifact spring-cloud-gateway-server is deprecated. It will be removed in the next major release. Please add spring-cloud-gateway-server-webflux dependency.
+
+**********************************************************
+
+
+2025-07-25 07:45:59 WARN  o.s.c.g.s.w.s.StarterDeprecatedAutoConfiguration - 
+
+**********************************************************
+
+spring-cloud-starter-gateway is deprecated. It will be removed in the next major release. Please use spring-cloud-starter-gateway-server-webflux instead.
+
+**********************************************************
+
+
+2025-07-25 07:45:59 WARN  o.s.c.l.c.LoadBalancerCacheAutoConfiguration$LoadBalancerCaffeineWarnLogger - Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2025-07-25 07:46:02 WARN  o.s.c.g.c.GatewayServerWebfluxPropertiesMigrationListener - 
+The use of configuration keys that have been renamed was found in the environment:
+
+Property source 'Config resource 'class path resource [application.yml]' via location 'optional:classpath:/'':
+	Key: spring.cloud.gateway.routes[0].id
+		Line: 23
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].id
+	Key: spring.cloud.gateway.routes[0].uri
+		Line: 24
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].uri
+	Key: spring.cloud.gateway.routes[0].predicates[0]
+		Line: 26
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].predicates[0]
+	Key: spring.cloud.gateway.routes[0].filters[0].name
+		Line: 28
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].filters[0].name
+	Key: spring.cloud.gateway.routes[0].filters[0].args.redis-rate-limiter.replenishrate
+		Line: 30
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].filters[0].args.redis-rate-limiter.replenishrate
+	Key: spring.cloud.gateway.routes[0].filters[0].args.redis-rate-limiter.burstcapacity
+		Line: 31
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].filters[0].args.redis-rate-limiter.burstcapacity
+	Key: spring.cloud.gateway.routes[0].filters[0].args.key-resolver
+		Line: 32
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].filters[0].args.key-resolver
+	Key: spring.cloud.gateway.routes[0].filters[1]
+		Line: 33
+		Replacement: spring.cloud.gateway.server.webflux.routes[0].filters[1]
+	Key: spring.cloud.gateway.routes[1].id
+		Line: 36
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].id
+	Key: spring.cloud.gateway.routes[1].uri
+		Line: 37
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].uri
+	Key: spring.cloud.gateway.routes[1].predicates[0]
+		Line: 39
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].predicates[0]
+	Key: spring.cloud.gateway.routes[1].filters[0].name
+		Line: 41
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].filters[0].name
+	Key: spring.cloud.gateway.routes[1].filters[0].args.redis-rate-limiter.replenishrate
+		Line: 43
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].filters[0].args.redis-rate-limiter.replenishrate
+	Key: spring.cloud.gateway.routes[1].filters[0].args.redis-rate-limiter.burstcapacity
+		Line: 44
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].filters[0].args.redis-rate-limiter.burstcapacity
+	Key: spring.cloud.gateway.routes[1].filters[0].args.key-resolver
+		Line: 45
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].filters[0].args.key-resolver
+	Key: spring.cloud.gateway.routes[1].filters[1]
+		Line: 46
+		Replacement: spring.cloud.gateway.server.webflux.routes[1].filters[1]
+	Key: spring.cloud.gateway.routes[2].id
+		Line: 49
+		Replacement: spring.cloud.gateway.server.webflux.routes[2].id
+	Key: spring.cloud.gateway.routes[2].uri
+		Line: 50
+		Replacement: spring.cloud.gateway.server.webflux.routes[2].uri
+	Key: spring.cloud.gateway.routes[2].predicates[0]
+		Line: 52
+		Replacement: spring.cloud.gateway.server.webflux.routes[2].predicates[0]
+	Key: spring.cloud.gateway.routes[2].filters[0].name
+		Line: 54
+		Replacement: spring.cloud.gateway.server.webflux.routes[2].filters[0].name
+	Key: spring.cloud.gateway.routes[2].filters[0].args.redis-rate-limiter.replenishrate
+		Line: 56
+		Replacement: spring.cloud.gateway.server.webflux.routes[2].filters[0].args.redis-rate-limiter.replenishrate
+	Key: spring.cloud.gateway.routes[2].filters[0].args.redis-rate-limiter.burstcapacity
+		Line: 57
+		Replacement: spring.cloud.gateway.server.webflux.routes[2].filters[0].args.redis-rate-limiter.burstcapacity
+	Key: spring.cloud.gateway.routes[2].filters[0].args.key-resolver
+		Line: 58
+		Replacement: spring.cloud.gateway.server.webflux.routes[2].filters[0].args.key-resolver
+	Key: spring.cloud.gateway.routes[2].filters[1]
+		Line: 59
+		Replacement: spring.cloud.gateway.server.webflux.routes[2].filters[1]
+	Key: spring.cloud.gateway.routes[3].id
+		Line: 62
+		Replacement: spring.cloud.gateway.server.webflux.routes[3].id
+	Key: spring.cloud.gateway.routes[3].uri
+		Line: 63
+		Replacement: spring.cloud.gateway.server.webflux.routes[3].uri
+	Key: spring.cloud.gateway.routes[3].predicates[0]
+		Line: 65
+		Replacement: spring.cloud.gateway.server.webflux.routes[3].predicates[0]
+	Key: spring.cloud.gateway.routes[3].filters[0].name
+		Line: 67
+		Replacement: spring.cloud.gateway.server.webflux.routes[3].filters[0].name
+	Key: spring.cloud.gateway.routes[3].filters[0].args.redis-rate-limiter.replenishrate
+		Line: 69
+		Replacement: spring.cloud.gateway.server.webflux.routes[3].filters[0].args.redis-rate-limiter.replenishrate
+	Key: spring.cloud.gateway.routes[3].filters[0].args.redis-rate-limiter.burstcapacity
+		Line: 70
+		Replacement: spring.cloud.gateway.server.webflux.routes[3].filters[0].args.redis-rate-limiter.burstcapacity
+	Key: spring.cloud.gateway.routes[3].filters[0].args.key-resolver
+		Line: 71
+		Replacement: spring.cloud.gateway.server.webflux.routes[3].filters[0].args.key-resolver
+	Key: spring.cloud.gateway.routes[3].filters[1]
+		Line: 72
+		Replacement: spring.cloud.gateway.server.webflux.routes[3].filters[1]
+	Key: spring.cloud.gateway.routes[4].id
+		Line: 74
+		Replacement: spring.cloud.gateway.server.webflux.routes[4].id
+	Key: spring.cloud.gateway.routes[4].uri
+		Line: 75
+		Replacement: spring.cloud.gateway.server.webflux.routes[4].uri
+	Key: spring.cloud.gateway.routes[4].predicates[0]
+		Line: 77
+		Replacement: spring.cloud.gateway.server.webflux.routes[4].predicates[0]
+	Key: spring.cloud.gateway.routes[4].filters[0].name
+		Line: 79
+		Replacement: spring.cloud.gateway.server.webflux.routes[4].filters[0].name
+	Key: spring.cloud.gateway.routes[4].filters[0].args.redis-rate-limiter.replenishrate
+		Line: 81
+		Replacement: spring.cloud.gateway.server.webflux.routes[4].filters[0].args.redis-rate-limiter.replenishrate
+	Key: spring.cloud.gateway.routes[4].filters[0].args.redis-rate-limiter.burstcapacity
+		Line: 82
+		Replacement: spring.cloud.gateway.server.webflux.routes[4].filters[0].args.redis-rate-limiter.burstcapacity
+	Key: spring.cloud.gateway.routes[4].filters[0].args.key-resolver
+		Line: 83
+		Replacement: spring.cloud.gateway.server.webflux.routes[4].filters[0].args.key-resolver
+	Key: spring.cloud.gateway.routes[4].filters[1]
+		Line: 84
+		Replacement: spring.cloud.gateway.server.webflux.routes[4].filters[1]
+
+
+Each configuration key has been temporarily mapped to its replacement for your convenience. To silence this warning, please update your configuration to use the new keys.
+
+2025-07-25 07:46:02 WARN  o.s.b.c.p.m.PropertiesMigrationListener - 
+The use of configuration keys that have been renamed was found in the environment:
+
+Property source 'Config resource 'class path resource [application.yml]' via location 'optional:classpath:/'':
+	Key: spring.cloud.gateway.discovery.locator.enabled
+		Line: 20
+		Replacement: spring.cloud.gateway.server.webflux.discovery.locator.enabled
+	Key: spring.cloud.gateway.discovery.locator.lower-case-service-id
+		Line: 21
+		Replacement: spring.cloud.gateway.server.webflux.discovery.locator.lower-case-service-id
+
+
+Each configuration key has been temporarily mapped to its replacement for your convenience. To silence this warning, please update your configuration to use the new keys.
+
+2025-07-25 07:46:02 ERROR o.s.b.c.p.m.PropertiesMigrationListener - 
+The use of configuration keys that are no longer supported was found in the environment:
+
+Property source 'Config resource 'class path resource [application.yml]' via location 'optional:classpath:/'':
+	Key: management.endpoint.prometheus.enabled
+		Line: 116
+		Reason: Replacement key 'management.endpoint.prometheus.access' uses an incompatible target type
+
+
+Please refer to the release notes or reference guide for potential alternatives.
+

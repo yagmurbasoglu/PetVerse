@@ -9,6 +9,8 @@ services:
       - "8761:8761"
     networks:
       - petverse-net
+    volumes:
+      - ./logs/eurekaserver:/app/logs
 
   configserver:
     build:
@@ -19,6 +21,8 @@ services:
       - eurekaserver
     networks:
       - petverse-net
+    volumes:
+      - ./logs/configserver:/app/logs
 
   activityservice:
     build:
@@ -30,6 +34,8 @@ services:
       - rabbitmq
     networks:
       - petverse-net
+    volumes:
+      - ./logs/activityservice:/app/logs
 
   apigateway:
     build:
@@ -41,6 +47,8 @@ services:
       - eurekaserver
     networks:
       - petverse-net
+    volumes:
+      - ./logs/apigateway:/app/logs
 
   userservice:
     build:
@@ -52,6 +60,8 @@ services:
       - postgres
     networks:
       - petverse-net
+    volumes:
+      - ./logs/userservice:/app/logs
 
   petservice:
     build:
@@ -63,6 +73,8 @@ services:
       - postgres
     networks:
       - petverse-net
+    volumes:
+      - ./logs/petservice:/app/logs
 
   notificationservice:
     build:
@@ -74,8 +86,9 @@ services:
       - postgres
     networks:
       - petverse-net
+    volumes:
+      - ./logs/notificationservice:/app/logs
 
-      
   weatherservice:
     build:
       context: ./weatherservice
@@ -121,8 +134,8 @@ services:
     ports:
       - "9090:9090"
     networks:
-      - petverse-net  
-  
+      - petverse-net
+
   grafana:
     image: grafana/grafana
     container_name: grafana
