@@ -17,6 +17,7 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.http.HttpStatus;
 import com.petverse.userservice.model.User;
 import static org.mockito.Mockito.*;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
