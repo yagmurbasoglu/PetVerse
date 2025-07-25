@@ -11,7 +11,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import com.petverse.model.ActivityType;
-
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Testcontainers
 @SpringBootTest
+@ActiveProfiles("test")
 public class ActivityServiceIntegrationTest {
 
     @Container

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
+import org.springframework.test.context.ActiveProfiles;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Optional;
 
-
+@ActiveProfiles("test")
 class NotificationConsumerTest {
 
     @Mock

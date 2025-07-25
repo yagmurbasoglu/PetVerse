@@ -8,9 +8,11 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import com.petservice.PetserviceApplication;
+import org.springframework.test.context.ActiveProfiles;
 
 @Testcontainers
 @SpringBootTest(classes = com.petservice.PetserviceApplication.class)
+@ActiveProfiles("test")
 public class PetserviceApplicationTests {
 
     @Container

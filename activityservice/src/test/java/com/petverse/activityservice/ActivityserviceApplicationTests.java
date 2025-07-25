@@ -7,9 +7,10 @@ import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-
+import org.springframework.test.context.ActiveProfiles;
 @Testcontainers
 @SpringBootTest
+@ActiveProfiles("test")
 public class ActivityserviceApplicationTests {
 
     @Container

@@ -6,11 +6,12 @@ import org.springframework.mock.http.server.reactive.MockServerHttpRequest;
 import org.springframework.mock.web.server.MockServerWebExchange;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
-
+import org.springframework.test.context.ActiveProfiles;
 import java.net.InetSocketAddress;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@ActiveProfiles("test")
 class RateLimiterConfigTest {
 
     private RateLimiterConfig config;
