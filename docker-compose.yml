@@ -14,12 +14,6 @@ services:
       - petverse-net
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8761/actuator/health"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 20s
 
   configserver:
     build:
@@ -28,15 +22,11 @@ services:
       - "8888:8888"
     networks:
       - petverse-net
-    volumes:
-      - ./petverse-config-repo:/config
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8888/actuator/health"]
       interval: 10s
       timeout: 5s
       retries: 5
-
-
 
   activityservice:
     build:
@@ -164,26 +154,6 @@ services:
     networks:
       - petverse-net
 
-  prometheus:
-    image: prom/prometheus
-    container_name: prometheus
-    volumes:
-      - prometheus_data:/prometheus # Prometheus’un veritabanını kalıcı hale getirir.
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-      - "9090:9090"
-    networks:
-      - petverse-net
-
-  grafana:
-    image: grafana/grafana
-    container_name: grafana
-    ports:
-      - "3000:3000"
-    networks:
-      - petverse-net
-    volumes:
-    - grafana-storage:/var/lib/grafana
 
   redis:
     image: redis:7
@@ -199,5 +169,3 @@ networks:
 
 volumes:
   pgdata:
-  grafana-storage:
-  prometheus_data:

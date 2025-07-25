@@ -3,5 +3,3 @@ spring:
     name: notificationservice
   config:
     import: optional:configserver:http://configserver:8888
-  profiles:
-    active: dev
