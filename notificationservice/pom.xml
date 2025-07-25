@@ -161,10 +161,12 @@
                     <target>${java.version}</target>
                     <annotationProcessorPaths>
                         <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
+                            <groupId>org.springframework.boot</groupId>
+                            <artifactId>spring-boot-configuration-processor</artifactId>
+                            <version>3.2.5</version> <!-- ✅ Kendi Spring Boot versiyonuna göre ayarla -->
                         </path>
                     </annotationProcessorPaths>
+
                 </configuration>
             </plugin>
             
