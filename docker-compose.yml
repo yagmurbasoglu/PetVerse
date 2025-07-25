@@ -16,7 +16,7 @@ services:
       - ./logs/eurekaserver:/app/logs
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      -
+
   configserver:
     build:
       context: ./configserver
@@ -88,7 +88,7 @@ services:
       - ./logs/userservice:/app/logs
     environment:
       - SPRING_PROFILES_ACTIVE=dev
-      -
+
   petservice:
     build:
       context: ./petservice
