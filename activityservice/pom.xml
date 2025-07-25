@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.3.1</version>
+        <version>3.2.5</version>
         <relativePath/>
     </parent>
 
@@ -27,6 +27,11 @@
     </properties>
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
 
 		<!-- OpenAPI / Swagger UI -->
 		<dependency>
@@ -47,12 +52,23 @@
     <artifactId>micrometer-registry-prometheus</artifactId>
 </dependency>
 
-<!-- Resilience4j Circuit Breaker -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+
+        <!-- Resilience4j Circuit Breaker -->
 <dependency>
     <groupId>io.github.resilience4j</groupId>
     <artifactId>resilience4j-spring-boot3</artifactId>
     <version>2.1.0</version>
 </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+
 
         <!-- Spring Web -->
         <dependency>
@@ -71,11 +87,14 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <!-- PostgreSQL -->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+            <version>42.7.2</version> <!-- ⬅️ Bunu ekle -->
             <scope>runtime</scope>
         </dependency>
+
 
         <!-- RabbitMQ -->
         <dependency>

@@ -3,6 +3,8 @@ package com.petverse.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -19,7 +21,18 @@ public class Activity {
     @Column(name = "type")
     private ActivityType type;
 
+    @Column(name = "mood")
+    private String mood;
+
     private String description;
     private Long userId;
     private Long petId;
+
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+    }
 }

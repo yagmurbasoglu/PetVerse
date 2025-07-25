@@ -16,6 +16,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import java.util.List;
+import com.petverse.dto.PetDailyStats;
+import com.petverse.service.PetMoodService;
+import com.petverse.util.PetMoodSentenceGenerator;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +34,8 @@ public class ActivityServiceImpl implements ActivityService {
     private final PetServiceClient petServiceClient;
     private final WeatherClient weatherClient;
     private final WeatherAdviceService weatherAdviceService;
+    private final PetMoodService petMoodService;
+    private final PetMoodSentenceGenerator petMoodSentenceGenerator;
 
     @Override
     @CircuitBreaker(name = "petService", fallbackMethod = "handlePetServiceFailure")
@@ -59,10 +69,29 @@ public class ActivityServiceImpl implements ActivityService {
             }
         }
 
-        // Aktivite kaydı
         Activity saved = activityRepository.save(activity);
 
-        // Bildirim event'i yayınla
+        LocalDate today = LocalDate.now();
+        LocalDateTime startOfDay = today.atStartOfDay();
+        LocalDateTime endOfDay = today.plusDays(1).atStartOfDay().minusNanos(1);
+
+        List<Activity> activities = activityRepository.findAllByPetIdAndCreatedAtBetween(
+                saved.getPetId(),
+                startOfDay,
+                endOfDay
+        );
+
+        WeatherResponse weather = weatherClient.getWeather("Ankara");
+
+        PetDailyStats stats = PetDailyStats.from(activities, weather);
+        String sentence = PetMoodSentenceGenerator.toSentence(stats);
+        System.out.println("HuggingFace input sentence: " + sentence);
+        String mood = petMoodService.predictMood(sentence);
+        System.out.println("Predicted mood: " + mood);
+
+        saved.setMood(mood);
+        activityRepository.save(saved);
+
         NotificationEvent event = new NotificationEvent(
                 saved.getType(),
                 saved.getDescription(),
@@ -75,7 +104,7 @@ public class ActivityServiceImpl implements ActivityService {
 
     // Fallback metodu (Resilience4j)
     public Activity handlePetServiceFailure(Activity activity, String userId, Throwable t) {
-        System.out.println("🔴 FALLBACK çalıştı! PetService devre dışı: " + t.getMessage());
+        System.out.println("FALLBACK çalıştı! PetService devre dışı: " + t.getMessage());
         throw new RuntimeException("PetService şu anda ulaşılamıyor. Lütfen daha sonra tekrar deneyin.");
     }
 }

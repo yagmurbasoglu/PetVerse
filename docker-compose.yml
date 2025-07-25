@@ -7,22 +7,30 @@ services:
       context: ./eurekaserver
     ports:
       - "8761:8761"
+    depends_on:
+      configserver:
+        condition: service_healthy
     networks:
       - petverse-net
     volumes:
       - ./logs/eurekaserver:/app/logs
-
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      -
   configserver:
     build:
       context: ./configserver
     ports:
       - "8888:8888"
-    depends_on:
-      - eurekaserver
     networks:
       - petverse-net
     volumes:
       - ./logs/configserver:/app/logs
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   activityservice:
     build:
@@ -30,12 +38,20 @@ services:
     ports:
       - "8084:8084"
     depends_on:
-      - postgres
-      - rabbitmq
+      postgres:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
     networks:
       - petverse-net
     volumes:
       - ./logs/activityservice:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
 
   apigateway:
     build:
@@ -43,12 +59,16 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - configserver
-      - eurekaserver
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
     networks:
       - petverse-net
     volumes:
       - ./logs/apigateway:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
 
   userservice:
     build:
@@ -56,25 +76,37 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      - configserver
-      - postgres
+      configserver:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
     networks:
       - petverse-net
     volumes:
       - ./logs/userservice:/app/logs
-
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      -
   petservice:
     build:
       context: ./petservice
     ports:
       - "8083:8083"
     depends_on:
-      - configserver
-      - postgres
+      configserver:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
     networks:
       - petverse-net
     volumes:
       - ./logs/petservice:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
 
   notificationservice:
     build:
@@ -82,12 +114,20 @@ services:
     ports:
       - "8085:8085"
     depends_on:
-      - rabbitmq
-      - postgres
+      postgres:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
     networks:
       - petverse-net
     volumes:
       - ./logs/notificationservice:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
 
   weatherservice:
     build:
@@ -95,11 +135,14 @@ services:
     ports:
       - "8086:8086"
     depends_on:
-      - configserver
-      - eurekaserver
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
     networks:
       - petverse-net
-
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
 
 
   postgres:

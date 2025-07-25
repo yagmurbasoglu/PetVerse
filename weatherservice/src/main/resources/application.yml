@@ -1,43 +1,5 @@
-server:
-  port: 8086
-
 spring:
   application:
     name: weatherservice
-  cloud:
-    config:
-      enabled: false
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://eurekaserver:8761/eureka
-  instance:
-    prefer-ip-address: true
-
-feign:
-  client:
-    config:
-      default:
-        loggerLevel: full
-
-springdoc:
-  api-docs:
-    path: /weather/v3/api-docs
-  swagger-ui:
-    path: /weather/swagger-ui.html
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, info, prometheus
-  endpoint:
-    health:
-      show-details: always
-    prometheus:
-      enabled: true
-  metrics:
-    export:
-      prometheus:
-        enabled: true
+  config:
+    import: optional:configserver:http://configserver:8888
