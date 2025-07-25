@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
         "spring.datasource.password=admin123",
         "spring.jpa.hibernate.ddl-auto=none"
 })
+@ActiveProfiles("test")
 class UserServiceApplicationTests {
 
     @Test
