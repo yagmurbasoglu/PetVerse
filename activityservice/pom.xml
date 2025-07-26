@@ -21,9 +21,9 @@
     <properties>
         <java.version>21</java.version>
         <spring-cloud.version>2023.0.1</spring-cloud.version>
- 
-         <sonar.organization>yagmurbasoglu</sonar.organization>
-         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+
+        <sonar.organization>yagmurbasoglu</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
@@ -33,24 +33,24 @@
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
-		<!-- OpenAPI / Swagger UI -->
-		<dependency>
-			<groupId>org.springdoc</groupId>
-			<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-			<version>2.5.0</version>
-		</dependency>
+        <!-- OpenAPI / Swagger UI -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>2.5.0</version>
+        </dependency>
 
-<!-- Actuator -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-actuator</artifactId>
-</dependency>
+        <!-- Actuator -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
         <!-- Micrometer Prometheus -->
-<dependency>
-    <groupId>io.micrometer</groupId>
-    <artifactId>micrometer-registry-prometheus</artifactId>
-</dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -58,11 +58,11 @@
         </dependency>
 
         <!-- Resilience4j Circuit Breaker -->
-<dependency>
-    <groupId>io.github.resilience4j</groupId>
-    <artifactId>resilience4j-spring-boot3</artifactId>
-    <version>2.1.0</version>
-</dependency>
+        <dependency>
+            <groupId>io.github.resilience4j</groupId>
+            <artifactId>resilience4j-spring-boot3</artifactId>
+            <version>2.1.0</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -113,7 +113,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-logging</artifactId>
@@ -122,6 +122,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.38</version>
             <scope>provided</scope>
         </dependency>
 
@@ -140,21 +141,21 @@
             <scope>test</scope>
         </dependency>
 
-<!-- Testcontainers Core -->
-<dependency>
-    <groupId>org.testcontainers</groupId>
-    <artifactId>junit-jupiter</artifactId>
-    <version>1.19.3</version>
-    <scope>test</scope>
-</dependency>
+        <!-- Testcontainers Core -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>1.19.3</version>
+            <scope>test</scope>
+        </dependency>
 
-<!-- PostgreSQL module for Testcontainers -->
-<dependency>
-    <groupId>org.testcontainers</groupId>
-    <artifactId>postgresql</artifactId>
-    <version>1.19.3</version>
-    <scope>test</scope>
-</dependency>
+        <!-- PostgreSQL module for Testcontainers -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>1.19.3</version>
+            <scope>test</scope>
+        </dependency>
 
 
         <dependency>
@@ -199,25 +200,25 @@
 
 
             <plugin>
-  <groupId>org.jacoco</groupId>
-  <artifactId>jacoco-maven-plugin</artifactId>
-  <version>0.8.10</version>
-  <executions>
-    <execution>
-      <id>prepare-agent</id>
-      <goals>
-        <goal>prepare-agent</goal>
-      </goals>
-    </execution>
-    <execution>
-      <id>report</id>
-      <phase>verify</phase>
-      <goals>
-        <goal>report</goal>
-      </goals>
-    </execution>
-  </executions>
-</plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.10</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
 
             <!-- Spring Boot Plugin -->

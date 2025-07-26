@@ -16,6 +16,7 @@ services:
       - ./logs/eurekaserver:/app/logs
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
 
   configserver:
     build:
@@ -31,6 +32,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    environment:
+      - TZ=Europe/Istanbul
 
   activityservice:
     build:
@@ -52,6 +55,7 @@ services:
       - ./logs/activityservice:/app/logs
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
 
   apigateway:
     build:
@@ -69,6 +73,7 @@ services:
       - ./logs/apigateway:/app/logs
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
 
   userservice:
     build:
@@ -88,6 +93,7 @@ services:
       - ./logs/userservice:/app/logs
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
 
   petservice:
     build:
@@ -107,6 +113,7 @@ services:
       - ./logs/petservice:/app/logs
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
 
   notificationservice:
     build:
@@ -128,6 +135,7 @@ services:
       - ./logs/notificationservice:/app/logs
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
 
   weatherservice:
     build:
@@ -143,6 +151,7 @@ services:
       - petverse-net
     environment:
       - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
 
 
   postgres:
