@@ -1,0 +1,8 @@
+2025-07-28 09:48:52 WARN  o.s.c.c.s.e.MultipleJGitEnvironmentRepository - Could not fetch remote for main remote: https://github.com/sedayhan934/petverse-config-repo.git
+2025-07-28 09:50:17 WARN  o.s.c.c.s.e.MultipleJGitEnvironmentRepository - Could not fetch remote for main remote: https://github.com/sedayhan934/petverse-config-repo.git
+2025-07-28 09:50:17 WARN  o.s.b.a.health.HealthEndpointSupport - Health contributor org.springframework.cloud.config.server.config.ConfigServerHealthIndicator (configServer) took 10399ms to respond
+2025-07-28 09:51:57 WARN  o.s.c.c.s.e.MultipleJGitEnvironmentRepository - Could not fetch remote for main remote: https://github.com/sedayhan934/petverse-config-repo.git
+2025-07-28 10:11:06 WARN  o.s.c.c.s.e.MultipleJGitEnvironmentRepository - Could not fetch remote for main remote: https://github.com/sedayhan934/petverse-config-repo.git
+2025-07-28 10:38:30 WARN  o.s.c.c.s.e.MultipleJGitEnvironmentRepository - Could not fetch remote for main remote: https://github.com/sedayhan934/petverse-config-repo.git
+2025-07-28 11:12:07 WARN  o.s.c.c.s.e.MultipleJGitEnvironmentRepository - Could not fetch remote for main remote: https://github.com/sedayhan934/petverse-config-repo.git
+2025-07-28 11:36:23 WARN  o.s.c.c.s.e.MultipleJGitEnvironmentRepository - Could not fetch remote for main remote: https://github.com/sedayhan934/petverse-config-repo.git

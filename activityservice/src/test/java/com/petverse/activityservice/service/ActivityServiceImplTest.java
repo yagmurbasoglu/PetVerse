@@ -40,6 +40,9 @@ class ActivityServiceImplTest {
     @Mock
     private WeatherAdviceService weatherAdviceService; 
 
+    @Mock
+    private PetMoodService petMoodService;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -83,7 +86,8 @@ void shouldCreateActivityIfUserOwnsPet() {
     assertEquals(42L, result.getUserId());
     verify(petServiceClient).getPetById(1L);
     verify(publisher).publish(any(NotificationEvent.class));
-    verify(activityRepository).save(any(Activity.class));
+    verify(activityRepository, times(2)).save(any(Activity.class));
+
 }
 
 

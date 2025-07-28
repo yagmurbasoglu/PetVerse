@@ -13,20 +13,33 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
+import com.petverse.userservice.security.JwtService;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@SpringBootTest(
+  properties = {
+    "spring.config.import=",
+    "spring.datasource.url=jdbc:tc:postgresql:15:///testdb",
+    "spring.datasource.username=test",
+    "spring.datasource.password=test",
+    "spring.jpa.hibernate.ddl-auto=create",
+    "jwt.public.key=mocked",
+    "jwt.private.key=mocked"
+  }
+)
 @Testcontainers
-@SpringBootTest
 @ActiveProfiles("test")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class UserServiceIntegrationTest {
 
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
-            .withDatabaseName("testdb")
-            .withUsername("test")
-            .withPassword("test");
+        .withDatabaseName("testdb")
+        .withUsername("test")
+        .withPassword("test");
 
     @DynamicPropertySource
     static void overrideProperties(DynamicPropertyRegistry registry) {
@@ -40,6 +53,15 @@ class UserServiceIntegrationTest {
 
     @Autowired
     private UserRepository userRepository;
+
+    @MockBean
+    private JwtEncoder jwtEncoder;
+
+    @MockBean
+    private JwtDecoder jwtDecoder;
+
+    @MockBean
+    private JwtService jwtService;
 
     @Test
     @Order(1)
