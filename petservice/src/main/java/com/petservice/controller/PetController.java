@@ -4,6 +4,8 @@ import com.petservice.dto.PetDTO;
 import com.petservice.service.PetService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.petservice.model.PetType;
+
 
 import java.util.List;
 
@@ -44,6 +46,11 @@ public class PetController {
             @RequestHeader("X-User-Id") String userId) {
         List<PetDTO> pets = petService.getPetsByUserId(userId);
         return ResponseEntity.ok(pets);
+    }
+
+    @GetMapping("/types")
+    public ResponseEntity<PetType[]> getPetTypes() {
+        return ResponseEntity.ok(PetType.values());
     }
 
     // Pet güncelleme — sadece sahibi güncelleyebilir
