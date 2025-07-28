@@ -1,18 +1,20 @@
 package com.petverse.integration;
 
 import com.petverse.model.Activity;
+import com.petverse.model.ActivityType;
 import com.petverse.repository.ActivityRepository;
+import com.petverse.service.PetMoodService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
+import org.springframework.test.context.TestPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
-import com.petverse.model.ActivityType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.TestPropertySource;
 
 import java.util.List;
 
@@ -24,8 +26,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestPropertySource(properties = {
     "spring.jpa.hibernate.ddl-auto=create"
 })
-
 public class ActivityServiceIntegrationTest {
+
+    @MockBean
+    private PetMoodService petMoodService;
 
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>("postgres:15")
