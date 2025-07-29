@@ -13,6 +13,7 @@ public class PetMoodService {
 
     private final WebClient client;
 
+    // Hugging Face token'ınızı https://huggingface.co/settings/tokens adresinden alıp application.yml dosyasına ekleyin
     public PetMoodService(@Value("${huggingface.token}") String hfToken) {
         this.client = WebClient.builder()
                 .baseUrl("https://api-inference.huggingface.co")
