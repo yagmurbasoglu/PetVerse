@@ -21,4 +21,4 @@ management:
         include: health,info
   endpoint:
     health:
-      show-details: alwaysy
+      show-details: alwaysy
