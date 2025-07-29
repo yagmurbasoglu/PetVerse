@@ -18,7 +18,7 @@ for %%S in (%SERVICES%) do (
     echo Derleniyor: %%S
     echo --------------------------------------------
     cd %%S
-    call mvn clean install -DskipTests
+    call ./mvnw clean install -DskipTests
     if %errorlevel% neq 0 (
         echo [HATA] %%S derlenirken hata olustu!
         pause

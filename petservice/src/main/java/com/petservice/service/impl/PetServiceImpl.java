@@ -5,6 +5,7 @@ import com.petservice.model.Pet;
 import com.petservice.repository.PetRepository;
 import com.petservice.service.PetService;
 import org.springframework.stereotype.Service;
+import com.petservice.model.PetType;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,7 +24,7 @@ public class PetServiceImpl implements PetService {
         Pet pet = new Pet();
         pet.setName(petDTO.getName());
         pet.setAge(petDTO.getAge());
-        pet.setSpecies(petDTO.getSpecies());
+        pet.setSpecies(PetType.valueOf(petDTO.getSpecies().toUpperCase()));
         pet.setUserId(petDTO.getUserId()); // 🟢 Kullanıcı ID'si
 
         Pet saved = petRepository.save(pet);
@@ -58,7 +59,7 @@ public class PetServiceImpl implements PetService {
                 .orElseThrow(() -> new RuntimeException("Pet not found with ID: " + id));
 
         existingPet.setName(dto.getName());
-        existingPet.setSpecies(dto.getSpecies());
+        existingPet.setSpecies(PetType.valueOf(dto.getSpecies().toUpperCase()));
         existingPet.setAge(dto.getAge());
         existingPet.setUserId(dto.getUserId()); // güvenlik için tekrar atanır
 
@@ -93,7 +94,7 @@ public class PetServiceImpl implements PetService {
         PetDTO dto = new PetDTO();
         dto.setId(pet.getId());
         dto.setName(pet.getName());
-        dto.setSpecies(pet.getSpecies());
+        dto.setSpecies(pet.getSpecies().name());
         dto.setAge(pet.getAge());
         dto.setUserId(pet.getUserId());
         return dto;

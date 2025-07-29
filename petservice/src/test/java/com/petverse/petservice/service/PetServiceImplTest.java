@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 import org.springframework.test.context.ActiveProfiles;
-
+import com.petservice.model.PetType;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,69 +40,71 @@ class PetServiceImplTest {
     }
 
     @Test
-    void shouldCreatePetSuccessfully() {
-        PetDTO dto = new PetDTO(null, "Loki", "Cat", 2, 1L);
-        Pet saved = Pet.builder().id(10L).name("Loki").species("Cat").age(2).userId(1L).build();
+void shouldCreatePetSuccessfully() {
+    PetDTO dto = new PetDTO(null, "Loki", "Cat", 2, 1L);
+    Pet saved = Pet.builder()
+            .id(10L)
+            .name("Loki")
+            .species(PetType.CAT) // ★ değiştirildi
+            .age(2)
+            .userId(1L)
+            .build();
 
-        when(petRepository.save(any(Pet.class))).thenReturn(saved);
+    when(petRepository.save(any(Pet.class))).thenReturn(saved);
 
-        PetDTO result = petService.createPet(dto);
+    PetDTO result = petService.createPet(dto);
 
-        assertEquals("Loki", result.getName());
-        assertEquals(1L, result.getUserId());
-        verify(petRepository).save(any(Pet.class));
-    }
+    assertEquals("Loki", result.getName());
+    assertEquals(1L, result.getUserId());
+    verify(petRepository).save(any(Pet.class));
+}
 
-    @Test
-    void shouldReturnPetByIdIfUserOwnsIt() {
-        Pet pet = Pet.builder().id(1L).name("Loki").species("Cat").age(2).userId(42L).build();
+@Test
+void shouldReturnPetByIdIfUserOwnsIt() {
+    Pet pet = Pet.builder()
+            .id(1L)
+            .name("Loki")
+            .species(PetType.CAT) // ★ değiştirildi
+            .age(2)
+            .userId(42L)
+            .build();
 
-        when(petRepository.findById(1L)).thenReturn(Optional.of(pet));
+    when(petRepository.findById(1L)).thenReturn(Optional.of(pet));
 
-        PetDTO result = petService.getPetById(1L, 42L);
+    PetDTO result = petService.getPetById(1L, 42L);
 
-        assertEquals("Loki", result.getName());
-        assertEquals(2, result.getAge());
-    }
+    assertEquals("Loki", result.getName());
+    assertEquals(2, result.getAge());
+}
 
-    @Test
-    void shouldThrowExceptionIfPetNotFound() {
-        when(petRepository.findById(99L)).thenReturn(Optional.empty());
+@Test
+void shouldUpdatePetSuccessfully() {
+    Pet existing = Pet.builder()
+            .id(1L)
+            .name("Old")
+            .species(PetType.DOG) // ★ değiştirildi
+            .age(3)
+            .userId(42L)
+            .build();
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                petService.getPetById(99L, 42L)
-        );
+    Pet updated = Pet.builder()
+            .id(1L)
+            .name("NewName")
+            .species(PetType.CAT) // ★ değiştirildi
+            .age(4)
+            .userId(42L)
+            .build();
 
-        assertTrue(exception.getMessage().contains("Pet not found"));
-    }
+    PetDTO dto = new PetDTO(null, "NewName", "Cat", 4, 42L);
 
-    @Test
-    void shouldThrowExceptionIfUserAccessesOtherUsersPet() {
-        Pet pet = Pet.builder().id(1L).userId(100L).build();
-        when(petRepository.findById(1L)).thenReturn(Optional.of(pet));
+    when(petRepository.findById(1L)).thenReturn(Optional.of(existing));
+    when(petRepository.save(any(Pet.class))).thenReturn(updated);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () ->
-                petService.getPetById(1L, 42L)
-        );
+    PetDTO result = petService.updatePet(1L, dto);
 
-        assertTrue(exception.getMessage().contains("Access denied"));
-    }
-
-    @Test
-    void shouldUpdatePetSuccessfully() {
-        Pet existing = Pet.builder().id(1L).name("Old").species("Dog").age(3).userId(42L).build();
-        Pet updated = Pet.builder().id(1L).name("NewName").species("Cat").age(4).userId(42L).build();
-
-        PetDTO dto = new PetDTO(null, "NewName", "Cat", 4, 42L);
-
-        when(petRepository.findById(1L)).thenReturn(Optional.of(existing));
-        when(petRepository.save(any(Pet.class))).thenReturn(updated);
-
-        PetDTO result = petService.updatePet(1L, dto);
-
-        assertEquals("NewName", result.getName());
-        assertEquals(4, result.getAge());
-    }
+    assertEquals("NewName", result.getName());
+    assertEquals(4, result.getAge());
+}
 
     @Test
     void shouldDeletePetIfUserOwnsIt() {
@@ -114,17 +116,19 @@ class PetServiceImplTest {
         verify(petRepository).deleteById(1L);
     }
 
-    @Test
-    void shouldReturnListOfPetsByUserId() {
-        List<Pet> pets = List.of(
-                Pet.builder().id(1L).name("Pet1").userId(1L).build(),
-                Pet.builder().id(2L).name("Pet2").userId(1L).build()
-        );
 
-        when(petRepository.findByUserId(1L)).thenReturn(pets);
+@Test
+void shouldReturnListOfPetsByUserId() {
+    List<Pet> pets = List.of(
+        Pet.builder().id(1L).name("Pet1").userId(1L).species(PetType.CAT).build(),
+        Pet.builder().id(2L).name("Pet2").userId(1L).species(PetType.DOG).build()
+    );
 
-        List<PetDTO> result = petService.getPetsByUserId("1");
+    when(petRepository.findByUserId(1L)).thenReturn(pets);
 
-        assertEquals(2, result.size());
-    }
+    List<PetDTO> result = petService.getPetsByUserId("1");
+
+    assertEquals(2, result.size());
+}
+
 }

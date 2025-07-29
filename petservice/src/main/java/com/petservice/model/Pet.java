@@ -17,7 +17,10 @@ public class Pet {
     private Long id;
 
     private String name;
-    private String species;
+
+    @Enumerated(EnumType.STRING)
+    private PetType species;
+
     private Integer age;
 
     private Long userId;
