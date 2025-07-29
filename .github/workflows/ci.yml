@@ -2,9 +2,9 @@ name: PetVerse CI Pipeline
 
 on:
   push:
-    branches: [ develop , feature/**]
+    branches: [ main, develop , feature/**]
   pull_request:
-    branches: [ develop, feature/**]
+    branches: [ main, develop, feature/**]
 
 jobs:
   build:
