@@ -1,0 +1,216 @@
+version: '3.8'
+
+services:
+
+  eurekaserver:
+    build:
+      context: ./eurekaserver
+    ports:
+      - "8761:8761"
+    depends_on:
+      configserver:
+        condition: service_healthy
+    networks:
+      - petverse-net
+    volumes:
+      - ./logs/eurekaserver:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
+
+  configserver:
+    build:
+      context: ./configserver
+    ports:
+      - "8888:8888"
+    networks:
+      - petverse-net
+    volumes:
+      - ./logs/configserver:/app/logs
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8888/actuator/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    environment:
+      - TZ=Europe/Istanbul
+
+  activityservice:
+    build:
+      context: ./activityservice
+    ports:
+      - "8084:8084"
+    depends_on:
+      postgres:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
+    networks:
+      - petverse-net
+    volumes:
+      - ./logs/activityservice:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
+
+  apigateway:
+    build:
+      context: ./apigateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
+    networks:
+      - petverse-net
+    volumes:
+      - ./logs/apigateway:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
+
+  userservice:
+    build:
+      context: ./userservice
+    ports:
+      - "8082:8082"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
+    networks:
+      - petverse-net
+    volumes:
+      - ./logs/userservice:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
+
+  petservice:
+    build:
+      context: ./petservice
+    ports:
+      - "8083:8083"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+      eurekaserver:
+        condition: service_started
+    networks:
+      - petverse-net
+    volumes:
+      - ./logs/petservice:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
+
+  notificationservice:
+    build:
+      context: ./notificationservice
+    ports:
+      - "8085:8085"
+    depends_on:
+      postgres:
+        condition: service_started
+      rabbitmq:
+        condition: service_started
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
+    networks:
+      - petverse-net
+    volumes:
+      - ./logs/notificationservice:/app/logs
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
+
+  weatherservice:
+    build:
+      context: ./weatherservice
+    ports:
+      - "8086:8086"
+    depends_on:
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_started
+    networks:
+      - petverse-net
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+      - TZ=Europe/Istanbul
+
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_DB: petcaredb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    networks:
+      - petverse-net
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - petverse-net
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - prometheus_data:/prometheus # Prometheus’un veritabanını kalıcı hale getirir.
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - petverse-net
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - petverse-net
+    volumes:
+    - grafana-storage:/var/lib/grafana
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - petverse-net
+
+networks:
+  petverse-net:
+    driver: bridge
+
+volumes:
+  pgdata:
+  grafana-storage:
+  prometheus_data:

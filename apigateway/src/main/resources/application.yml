@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: apigateway
+  config:
+    import: optional:configserver:http://configserver:8888
+
